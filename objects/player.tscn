@@ -1,8 +1,17 @@
 [gd_scene load_steps=3 format=3 uid="uid://wilclsh64myp"]
 
-[ext_resource type="Texture2D" uid="uid://co5yey2y7yboh" path="res://assets/icon.svg" id="1_eqqp1"]
 [ext_resource type="Script" uid="uid://cphs6p6g4lci0" path="res://scripts/player.gd" id="2_ykyjo"]
 
-[node name="Player" type="Sprite2D"]
-texture = ExtResource("1_eqqp1")
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_eqqp1"]
+
+[node name="Player" type="CharacterBody3D"]
 script = ExtResource("2_ykyjo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_eqqp1")
+
+[node name="ViewPivot" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.870246)
+
+[node name="Camera3D" type="Camera3D" parent="ViewPivot"]
+current = true

@@ -1,8 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://ovaec6nc7m42"]
+[gd_scene load_steps=5 format=3 uid="uid://ovaec6nc7m42"]
 
 [ext_resource type="PackedScene" uid="uid://wilclsh64myp" path="res://objects/player.tscn" id="1_o5qli"]
 
-[node name="Main" type="Node2D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_o5qli"]
+size = Vector3(11.490173, 1, 10.053284)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o5qli"]
+albedo_color = Color(0.054579847, 0.12838903, 0.046354443, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_o5qli"]
+material = SubResource("StandardMaterial3D_o5qli")
+size = Vector3(11.55, 1, 10.07)
+
+[node name="Main" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("1_o5qli")]
-position = Vector2(573, 314)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2562381, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.7621403, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_o5qli")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_o5qli")
