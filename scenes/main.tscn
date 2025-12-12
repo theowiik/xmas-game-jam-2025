@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://ovaec6nc7m42"]
+[gd_scene load_steps=10 format=3 uid="uid://ovaec6nc7m42"]
 
 [ext_resource type="PackedScene" uid="uid://wilclsh64myp" path="res://objects/player.tscn" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://cejjqp3bc5p8i" path="res://scripts/main.gd" id="1_tefeu"]
 [ext_resource type="PackedScene" uid="uid://ka2ji00su2ft" path="res://objects/person.tscn" id="2_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://db8ym36hjqs6c" path="res://objects/store.tscn" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://bn1if5g85g55r" path="res://objects/tree.tscn" id="4_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://c2pay3j4jqds6" path="res://objects/camera.tscn" id="5_tbgi4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_o5qli"]
 size = Vector3(52.07866, 1, 43.34694)
@@ -16,9 +18,12 @@ material = SubResource("StandardMaterial3D_o5qli")
 size = Vector3(46.21, 1, 40.345)
 
 [node name="Main" type="Node3D"]
+script = ExtResource("1_tefeu")
 
 [node name="Player" parent="." instance=ExtResource("1_o5qli")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2562381, 0)
+
+[node name="Camera" parent="." instance=ExtResource("5_tbgi4")]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.7621403, 0)

@@ -1,9 +1,21 @@
 class_name Player extends CharacterBody3D
 
 @onready var view_pivot: Node3D = $ViewPivot
+@onready var desired_camera_position: Node3D = $ViewPivot/DesiredCameraPosition
+
+var camera: Node3D = null
+
 var jump_velocity: float = 4.5
 var gravity: float = 9.82
 var speed: float = 5.0
+
+var rotation_smoothing: float = 8.0
+var camera_position_smoothing: float = 10.0
+var camera_rotation_smoothing: float = 10.0
+
+var target_rotation_y: float = 0.0
+var target_rotation_x: float = 0.0
+var current_rotation_x: float = 0.0
 
 
 func _ready() -> void:
@@ -12,6 +24,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	move(delta)
+	smooth_rotation(delta)
+	smooth_camera(delta)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -20,9 +34,30 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	elif event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		var mouse_delta: Vector2 = event.relative
-		rotate_y(deg_to_rad(-mouse_delta.x * 0.1))
-		view_pivot.rotate_x(deg_to_rad(-mouse_delta.y * 0.1))
-		view_pivot.rotation.x = clamp(view_pivot.rotation.x, deg_to_rad(-89), deg_to_rad(89))
+		target_rotation_y += deg_to_rad(-mouse_delta.x * 0.1)
+		target_rotation_x += deg_to_rad(-mouse_delta.y * 0.1)
+		target_rotation_x = clamp(target_rotation_x, deg_to_rad(-89), deg_to_rad(89))
+
+
+func smooth_rotation(delta: float) -> void:
+	rotation.y = lerp_angle(rotation.y, target_rotation_y, rotation_smoothing * delta)
+	current_rotation_x = lerp(current_rotation_x, target_rotation_x, rotation_smoothing * delta)
+	view_pivot.rotation.x = current_rotation_x
+
+
+func smooth_camera(delta: float) -> void:
+	if camera == null:
+		return
+
+	camera.global_position = camera.global_position.lerp(
+		desired_camera_position.global_position,
+		camera_position_smoothing * delta
+	)
+
+	camera.global_rotation = camera.global_rotation.lerp(
+		desired_camera_position.global_rotation,
+		camera_rotation_smoothing * delta
+	)
 
 
 func move(delta: float) -> void:
