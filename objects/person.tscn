@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://ka2ji00su2ft"]
+
+[ext_resource type="Texture2D" uid="uid://b36ifskhaht75" path="res://assets/sprites/person.png" id="1_7g1rn"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_7g1rn"]
+
+[node name="Person" type="Node3D"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("1_7g1rn")
+
+[node name="Reference" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("CapsuleMesh_7g1rn")

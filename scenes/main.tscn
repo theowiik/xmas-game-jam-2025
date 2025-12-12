@@ -1,16 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://ovaec6nc7m42"]
+[gd_scene load_steps=8 format=3 uid="uid://ovaec6nc7m42"]
 
 [ext_resource type="PackedScene" uid="uid://wilclsh64myp" path="res://objects/player.tscn" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://ka2ji00su2ft" path="res://objects/person.tscn" id="2_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://db8ym36hjqs6c" path="res://objects/store.tscn" id="3_sugp2"]
+[ext_resource type="PackedScene" uid="uid://bn1if5g85g55r" path="res://objects/tree.tscn" id="4_jyhfs"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_o5qli"]
-size = Vector3(11.490173, 1, 10.053284)
+size = Vector3(52.07866, 1, 43.34694)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o5qli"]
-albedo_color = Color(0.054579847, 0.12838903, 0.046354443, 1)
+albedo_color = Color(0.83874166, 0.8673098, 0.86961716, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_o5qli"]
 material = SubResource("StandardMaterial3D_o5qli")
-size = Vector3(11.55, 1, 10.07)
+size = Vector3(46.21, 1, 40.345)
 
 [node name="Main" type="Node3D"]
 
@@ -25,3 +28,22 @@ shape = SubResource("BoxShape3D_o5qli")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 mesh = SubResource("BoxMesh_o5qli")
+
+[node name="Node3D" parent="." instance=ExtResource("2_0wfyh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3563247, 0, -4.2235384)
+
+[node name="Node3D3" parent="." instance=ExtResource("2_0wfyh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.694105, 0, -4.6321945)
+
+[node name="Node3D4" parent="." instance=ExtResource("2_0wfyh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.4638567, 0, 4.3397207)
+
+[node name="Node3D2" parent="." instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.700038, 1.1580691, -2.2665484)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.25881907, 0.9659258, 0, -0.9659258, 0.25881907, 0, 9.349139, 0)
+light_energy = 0.547
+
+[node name="Tree" parent="." instance=ExtResource("4_jyhfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9814558, 2.7003293, -12.030553)
