@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://wilclsh64myp"]
+[gd_scene load_steps=4 format=3 uid="uid://wilclsh64myp"]
 
+[ext_resource type="PackedScene" uid="uid://c2pay3j4jqds6" path="res://objects/camera.tscn" id="2_uxov2"]
 [ext_resource type="Script" uid="uid://cphs6p6g4lci0" path="res://scripts/player.gd" id="2_ykyjo"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_eqqp1"]
@@ -15,3 +16,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.870246)
 
 [node name="Camera3D" type="Camera3D" parent="ViewPivot"]
 current = true
+fov = 64.422035
+
+[node name="Camera" parent="ViewPivot" instance=ExtResource("2_uxov2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.09499267, -0.6438405)
