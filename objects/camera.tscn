@@ -1,7 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://c2pay3j4jqds6"]
+[gd_scene load_steps=8 format=3 uid="uid://c2pay3j4jqds6"]
 
 [ext_resource type="Script" uid="uid://clb0vqw04aqg8" path="res://scripts/camera.gd" id="1_exrbp"]
 [ext_resource type="Texture2D" uid="uid://bh71en6tllg5i" path="res://assets/sprites/tree.png" id="2_n8nd1"]
+
+[sub_resource type="Environment" id="Environment_n8nd1"]
+background_mode = 1
+background_color = Color(0.5681936, 0.40494525, 0.536832, 1)
+volumetric_fog_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_exrbp"]
 albedo_color = Color(0.24477637, 0.2447764, 0.24477637, 1)
@@ -23,6 +28,7 @@ script = ExtResource("1_exrbp")
 size = Vector2i(160, 90)
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport"]
+environment = SubResource("Environment_n8nd1")
 fov = 81.31556
 
 [node name="CanvasLayer" type="CanvasLayer" parent="SubViewport"]
