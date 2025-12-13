@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ovaec6nc7m42"]
+[gd_scene load_steps=11 format=3 uid="uid://ovaec6nc7m42"]
 
 [ext_resource type="PackedScene" uid="uid://wilclsh64myp" path="res://objects/player.tscn" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://cejjqp3bc5p8i" path="res://scripts/main.gd" id="1_tefeu"]
@@ -16,6 +16,9 @@ albedo_color = Color(0.83874166, 0.8673098, 0.86961716, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_o5qli"]
 material = SubResource("StandardMaterial3D_o5qli")
 size = Vector3(46.21, 1, 40.345)
+
+[sub_resource type="Environment" id="Environment_tefeu"]
+background_mode = 1
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_tefeu")
@@ -49,6 +52,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.700038, 1.1580691, -2.2665
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.25881907, 0.9659258, 0, -0.9659258, 0.25881907, 0, 9.349139, 0)
 light_energy = 0.547
+light_cull_mask = 4293918721
 
 [node name="Tree" parent="." instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9814558, 2.7003293, -12.030553)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_tefeu")

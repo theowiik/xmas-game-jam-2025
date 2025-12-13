@@ -1,8 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://wilclsh64myp"]
+[gd_scene load_steps=4 format=3 uid="uid://wilclsh64myp"]
 
 [ext_resource type="Script" uid="uid://cphs6p6g4lci0" path="res://scripts/player.gd" id="2_ykyjo"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_eqqp1"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_eqqp1"]
+size = Vector3(0.6, 0.3, 0.2)
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("2_ykyjo")
@@ -16,5 +19,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.870246)
 [node name="DesiredCameraPosition" type="Marker3D" parent="ViewPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.8858592)
 
+[node name="ReferenceCamera" type="MeshInstance3D" parent="ViewPivot/DesiredCameraPosition"]
+visible = false
+layers = 3
+mesh = SubResource("BoxMesh_eqqp1")
+
 [node name="Camera3D" type="Camera3D" parent="ViewPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.16453296)
+cull_mask = 2
+fov = 21.780647

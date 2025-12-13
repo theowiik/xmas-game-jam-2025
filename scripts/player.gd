@@ -9,6 +9,7 @@ var jump_velocity: float = 4.5
 var gravity: float = 9.82
 var speed: float = 5.0
 
+var look_speed: float = 0.8
 var player_rotation_smoothing: float = 5.0
 var camera_position_smoothing: float = 15.0
 var camera_rotation_smoothing: float = 15.0
@@ -29,9 +30,9 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	move(delta)
-	smooth_rotation(delta)
-	apply_camera_bob(delta)
-	smooth_camera(delta)
+	look(delta)
+	camera_shake(delta)
+	move_camera(delta)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -40,18 +41,21 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	elif event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		var mouse_delta: Vector2 = event.relative
-		target_rotation_y += deg_to_rad(-mouse_delta.x * 0.1)
-		target_rotation_x += deg_to_rad(-mouse_delta.y * 0.1)
-		target_rotation_x = clamp(target_rotation_x, deg_to_rad(-60), deg_to_rad(60))
+		target_rotation_y = deg_to_rad(-mouse_delta.x * look_speed)
+		target_rotation_x = deg_to_rad(-mouse_delta.y * look_speed)
 
 
-func smooth_rotation(delta: float) -> void:
-	rotation.y = lerp_angle(rotation.y, target_rotation_y, player_rotation_smoothing * delta)
-	current_rotation_x = lerp(current_rotation_x, target_rotation_x, player_rotation_smoothing * delta)
+func look(delta: float) -> void:
+	rotation.y += target_rotation_y * player_rotation_smoothing * delta
+	current_rotation_x += target_rotation_x * player_rotation_smoothing * delta
+	current_rotation_x = clamp(current_rotation_x, deg_to_rad(-60), deg_to_rad(60))
 	view_pivot.rotation.x = current_rotation_x
 
+	target_rotation_y = lerp(target_rotation_y, 0.0, 10.0 * delta)
+	target_rotation_x = lerp(target_rotation_x, 0.0, 10.0 * delta)
 
-func apply_camera_bob(delta: float) -> void:
+
+func camera_shake(delta: float) -> void:
 	var velocity_2d := Vector2(velocity.x, velocity.z)
 	var is_moving := velocity_2d.length() > 0.1 and is_on_floor()
 
@@ -67,7 +71,7 @@ func apply_camera_bob(delta: float) -> void:
 	view_pivot.position.x = bob_offset_x
 
 
-func smooth_camera(delta: float) -> void:
+func move_camera(delta: float) -> void:
 	if camera == null:
 		return
 
@@ -75,7 +79,6 @@ func smooth_camera(delta: float) -> void:
 		desired_camera_position.global_position, camera_position_smoothing * delta
 	)
 
-	# Use quaternion slerp for proper rotation interpolation (avoids 360° spins)
 	var current_quat := camera.global_transform.basis.get_rotation_quaternion()
 	var target_quat := desired_camera_position.global_transform.basis.get_rotation_quaternion()
 	var interpolated_quat := current_quat.slerp(target_quat, camera_rotation_smoothing * delta)
