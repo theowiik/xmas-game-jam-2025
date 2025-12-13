@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://c2pay3j4jqds6"]
+[gd_scene load_steps=10 format=3 uid="uid://c2pay3j4jqds6"]
 
 [ext_resource type="Script" uid="uid://clb0vqw04aqg8" path="res://scripts/camera.gd" id="1_exrbp"]
 [ext_resource type="Texture2D" uid="uid://u4lj8u1271u8" path="res://assets/sprites/camera_hud.png" id="2_n8nd1"]
+[ext_resource type="AudioStream" uid="uid://c4nd4eprt71f5" path="res://assets/sfx/sample.wav" id="3_d7esd"]
 
 [sub_resource type="Environment" id="Environment_n8nd1"]
 background_mode = 1
@@ -72,3 +73,6 @@ mesh = SubResource("BoxMesh_exrbp")
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, -0.17090648)
 mesh = SubResource("CylinderMesh_n8nd1")
+
+[node name="ShutterPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_d7esd")

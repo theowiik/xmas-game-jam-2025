@@ -5,6 +5,7 @@ signal photo_taken(detected_objects: Array[Dictionary], fov: float)
 @onready var sub_viewport: SubViewport = $SubViewport
 @onready var camera: Camera3D = $SubViewport/Camera3D
 @onready var camera_pos: Node3D = $CameraPos
+@onready var shutter_player: AudioStreamPlayer = $ShutterPlayer
 
 var target_fov: float = 75.0
 var zoom_speed: float = 8.0
@@ -32,18 +33,25 @@ func _take_photo() -> void:
 	print("I took a photo of...")
 	_find_objects_in_view()
 	_save_photo()
+	shutter_player.play()
 
 
 func _find_objects_in_view() -> void:
 	var photogenic_objects: Array[Node] = get_tree().get_nodes_in_group("photogenic")
 	var detected_objects: Array[Dictionary] = []
+	var viewport_size: Vector2 = sub_viewport.get_visible_rect().size
 
 	for obj in photogenic_objects:
 		if obj is Node3D:
 			var obj_3d: Node3D = obj as Node3D
 			if _is_in_camera_view(obj_3d):
 				var dist: float = camera.global_position.distance_to(obj_3d.global_position)
-				detected_objects.append({"name": obj_3d.name, "distance": dist})
+				var screen_pos: Vector2 = camera.unproject_position(obj_3d.global_position)
+				# Normalize screen position (0-1 range, where 0.5, 0.5 is center)
+				var normalized_pos: Vector2 = screen_pos / viewport_size
+				detected_objects.append(
+					{"name": obj_3d.name, "distance": dist, "screen_pos": normalized_pos}
+				)
 
 	detected_objects.sort_custom(func(a, b): return a.distance < b.distance)
 
