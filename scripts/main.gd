@@ -5,4 +5,4 @@ extends Node3D
 
 
 func _ready() -> void:
-    player.camera = camera
+	player.camera = camera

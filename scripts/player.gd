@@ -72,13 +72,11 @@ func smooth_camera(delta: float) -> void:
 		return
 
 	camera.global_position = camera.global_position.lerp(
-		desired_camera_position.global_position,
-		camera_position_smoothing * delta
+		desired_camera_position.global_position, camera_position_smoothing * delta
 	)
 
 	camera.global_rotation = camera.global_rotation.lerp(
-		desired_camera_position.global_rotation,
-		camera_rotation_smoothing * delta
+		desired_camera_position.global_rotation, camera_rotation_smoothing * delta
 	)
 
 
