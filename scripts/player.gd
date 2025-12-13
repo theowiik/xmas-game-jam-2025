@@ -25,9 +25,10 @@ var bob_sway: float = 0.05
 
 # Physics-based camera rotation
 var camera_angular_velocity: Vector3 = Vector3.ZERO
-var camera_roll_intensity: float = 0.15  # How much the camera rolls when turning
-var camera_tilt_intensity: float = 0.1   # How much the camera tilts on lateral movement
-var camera_angular_damping: float = 8.0   # How fast angular velocity dampens
+var camera_roll_intensity: float = 0.15  # How much the camera rolls when turning (z-axis)
+var camera_tilt_intensity: float = 0.1  # How much the camera tilts on lateral movement (z-axis)
+var camera_yaw_sway: float = 0.08  # How much the camera sways when moving (y-axis)
+var camera_angular_damping: float = 8.0  # How fast angular velocity dampens
 var previous_rotation_y: float = 0.0
 
 
@@ -98,14 +99,22 @@ func move_camera(delta: float) -> void:
 	# Calculate lateral movement tilt based on velocity
 	var velocity_2d := Vector2(velocity.x, velocity.z)
 	var player_right := transform.basis.x
+	var player_forward := -transform.basis.z
 	var lateral_velocity := velocity.dot(player_right)
+	var forward_velocity := velocity.dot(player_forward)
 	var lateral_tilt := lateral_velocity * camera_tilt_intensity
 
-	# Add lateral tilt to angular velocity
+	# Add lateral tilt to angular velocity (z-axis)
 	camera_angular_velocity.z += lateral_tilt * delta * 10.0
 
+	# Add forward/backward sway to angular velocity (y-axis)
+	var yaw_sway := sin(bob_time * 0.5) * forward_velocity * camera_yaw_sway
+	camera_angular_velocity.y += yaw_sway * delta * 10.0
+
 	# Apply damping to angular velocity
-	camera_angular_velocity = camera_angular_velocity.lerp(Vector3.ZERO, camera_angular_damping * delta)
+	camera_angular_velocity = camera_angular_velocity.lerp(
+		Vector3.ZERO, camera_angular_damping * delta
+	)
 
 	# Get the target rotation from desired camera position
 	var target_quat := desired_camera_position.global_transform.basis.get_rotation_quaternion()
@@ -117,7 +126,9 @@ func move_camera(delta: float) -> void:
 	# Smoothly interpolate to the combined rotation
 	var current_quat := camera.global_transform.basis.get_rotation_quaternion()
 	var target_physics_quat := combined_basis.get_rotation_quaternion()
-	var interpolated_quat := current_quat.slerp(target_physics_quat, camera_rotation_smoothing * delta)
+	var interpolated_quat := current_quat.slerp(
+		target_physics_quat, camera_rotation_smoothing * delta
+	)
 
 	camera.global_transform.basis = Basis(interpolated_quat)
 
