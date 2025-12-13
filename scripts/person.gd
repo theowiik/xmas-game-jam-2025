@@ -4,6 +4,8 @@ extends CharacterBody3D
 @onready var idle_sprite: Sprite3D = $IdleSprite
 @onready var smile_sprite: Sprite3D = $SmileSprite
 @onready var see_camera_label: Label3D = $SeeCameraLabel
+@onready var smile_player: AudioStreamPlayer3D = $SmilePlayer
+
 var speed: float = 5.0
 var min_wait_time: float = 0.5
 var max_wait_time: float = 2.0
@@ -15,6 +17,7 @@ var camera: Node3D = null
 var default_color: Color = Color.WHITE
 var in_frame_color: Color = Color(0.3, 1.0, 0.3)  # Green tint
 var centered_color: Color = Color(1.0, 1.0, 0.3)  # Yellow tint
+
 
 func _ready() -> void:
 	# Camera reference will be set by Main.gd
