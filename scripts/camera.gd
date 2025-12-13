@@ -25,10 +25,12 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_pressed("PHOTO"):
 		_take_photo()
 
+
 func _take_photo() -> void:
 	print("I took a photo of...")
 	_find_objects_in_view()
 	_save_photo()
+
 
 func _find_objects_in_view() -> void:
 	var photogenic_objects: Array[Node] = get_tree().get_nodes_in_group("photogenic")
@@ -39,10 +41,7 @@ func _find_objects_in_view() -> void:
 			var obj_3d: Node3D = obj as Node3D
 			if _is_in_camera_view(obj_3d):
 				var dist: float = camera.global_position.distance_to(obj_3d.global_position)
-				detected_objects.append({
-					"name": obj_3d.name,
-					"distance": dist
-				})
+				detected_objects.append({"name": obj_3d.name, "distance": dist})
 
 	detected_objects.sort_custom(func(a, b): return a.distance < b.distance)
 
@@ -53,6 +52,7 @@ func _find_objects_in_view() -> void:
 		for obj_data in detected_objects:
 			print("  - %s (%.1fm away)" % [obj_data.name, obj_data.distance])
 	print("======================\n")
+
 
 func _is_in_camera_view(node: Node3D) -> bool:
 	var obj_pos: Vector3 = node.global_position
@@ -75,6 +75,7 @@ func _is_in_camera_view(node: Node3D) -> bool:
 		return false
 
 	return true
+
 
 func _save_photo() -> void:
 	var img: Image = sub_viewport.get_texture().get_image()
