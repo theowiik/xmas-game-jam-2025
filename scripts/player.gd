@@ -23,6 +23,13 @@ var bob_speed: float = 12.0
 var bob_intensity: float = 0.08
 var bob_sway: float = 0.05
 
+# Physics-based camera rotation
+var camera_angular_velocity: Vector3 = Vector3.ZERO
+var camera_roll_intensity: float = 0.15  # How much the camera rolls when turning
+var camera_tilt_intensity: float = 0.1   # How much the camera tilts on lateral movement
+var camera_angular_damping: float = 8.0   # How fast angular velocity dampens
+var previous_rotation_y: float = 0.0
+
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -46,7 +53,16 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func look(delta: float) -> void:
-	rotation.y += target_rotation_y * player_rotation_smoothing * delta
+	var rotation_delta_y = target_rotation_y * player_rotation_smoothing * delta
+	rotation.y += rotation_delta_y
+
+	# Track rotation velocity for physics-based camera
+	var rotation_velocity_y = (rotation.y - previous_rotation_y) / delta if delta > 0 else 0
+	previous_rotation_y = rotation.y
+
+	# Apply angular velocity based on turning speed (for camera roll)
+	camera_angular_velocity.z = -rotation_velocity_y * camera_roll_intensity
+
 	current_rotation_x += target_rotation_x * player_rotation_smoothing * delta
 	current_rotation_x = clamp(current_rotation_x, deg_to_rad(-60), deg_to_rad(60))
 	view_pivot.rotation.x = current_rotation_x
@@ -79,9 +95,30 @@ func move_camera(delta: float) -> void:
 		desired_camera_position.global_position, camera_position_smoothing * delta
 	)
 
-	var current_quat := camera.global_transform.basis.get_rotation_quaternion()
+	# Calculate lateral movement tilt based on velocity
+	var velocity_2d := Vector2(velocity.x, velocity.z)
+	var player_right := transform.basis.x
+	var lateral_velocity := velocity.dot(player_right)
+	var lateral_tilt := lateral_velocity * camera_tilt_intensity
+
+	# Add lateral tilt to angular velocity
+	camera_angular_velocity.z += lateral_tilt * delta * 10.0
+
+	# Apply damping to angular velocity
+	camera_angular_velocity = camera_angular_velocity.lerp(Vector3.ZERO, camera_angular_damping * delta)
+
+	# Get the target rotation from desired camera position
 	var target_quat := desired_camera_position.global_transform.basis.get_rotation_quaternion()
-	var interpolated_quat := current_quat.slerp(target_quat, camera_rotation_smoothing * delta)
+
+	# Apply physics-based rotation (angular velocity) on top of target rotation
+	var physics_rotation := Basis.from_euler(camera_angular_velocity)
+	var combined_basis := Basis(target_quat) * physics_rotation
+
+	# Smoothly interpolate to the combined rotation
+	var current_quat := camera.global_transform.basis.get_rotation_quaternion()
+	var target_physics_quat := combined_basis.get_rotation_quaternion()
+	var interpolated_quat := current_quat.slerp(target_physics_quat, camera_rotation_smoothing * delta)
+
 	camera.global_transform.basis = Basis(interpolated_quat)
 
 
