@@ -1,19 +1,24 @@
 extends CharacterBody3D
 
 @onready var agent: NavigationAgent3D = $NavigationAgent3D
-@onready var sprite: Sprite3D = $Sprite3D
+@onready var idle_sprite: Sprite3D = $IdleSprite
+@onready var smile_sprite: Sprite3D = $SmileSprite
 @onready var see_camera_label: Label3D = $SeeCameraLabel
+@onready var smile_player: AudioStreamPlayer3D = $SmilePlayer
+
 var speed: float = 5.0
 var min_wait_time: float = 0.5
 var max_wait_time: float = 2.0
 var wait_time: float = 0.0
 var current_wait_time: float = 0.0
 var is_waiting: bool = false
+var is_smiling: bool = false
 
 var camera: Node3D = null
-var default_color: Color = Color.WHITE
-var in_frame_color: Color = Color(0.3, 1.0, 0.3)  # Green tint
-var centered_color: Color = Color(1.0, 1.0, 0.3)  # Yellow tint
+
+# Smile FOV thresholds - at reference distance, FOV must be <= this to smile
+var reference_distance: float = 5.0  # Distance at which reference FOV is used
+var reference_fov: float = 50.0  # FOV threshold at reference distance
 
 
 func _ready() -> void:
@@ -39,18 +44,37 @@ func _process(_delta: float) -> void:
 		var center_offset: Vector2 = normalized_pos - Vector2(0.5, 0.5)
 		var center_distance: float = center_offset.length()
 
-		# If centered (within a small threshold), use centered color and show label
-		if center_distance < 0.15:  # Roughly centered
-			sprite.modulate = centered_color
+		# Calculate distance to camera and required FOV
+		var distance_to_camera: float = cam.global_position.distance_to(global_position)
+		var current_fov: float = cam.fov
+
+		# Calculate required FOV based on distance
+		# Farther away = need lower FOV (more zoom) to smile
+		var required_fov: float = reference_fov * (reference_distance / distance_to_camera)
+		var is_zoomed_enough: bool = current_fov <= required_fov
+
+		# If centered (within a small threshold) AND zoomed in enough, show smile sprite
+		if center_distance < 0.15 and is_zoomed_enough:  # Roughly centered and zoomed enough
+			smile_sprite.visible = true
+			idle_sprite.visible = false
 			see_camera_label.visible = true
+
+			# Play smile sound when starting to smile
+			if not is_smiling:
+				smile_player.play()
+				is_smiling = true
 		else:
-			# Just in frame, use in-frame color
-			sprite.modulate = in_frame_color
+			# Just in frame, show idle sprite
+			smile_sprite.visible = false
+			idle_sprite.visible = true
 			see_camera_label.visible = false
+			is_smiling = false
 	else:
-		# Not in frame, use default color
-		sprite.modulate = default_color
+		# Not in frame, show idle sprite
+		smile_sprite.visible = false
+		idle_sprite.visible = true
 		see_camera_label.visible = false
+		is_smiling = false
 
 
 func _unhandled_input(event: InputEvent) -> void:

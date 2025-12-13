@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://ka2ji00su2ft"]
+[gd_scene load_steps=8 format=3 uid="uid://ka2ji00su2ft"]
 
 [ext_resource type="Texture2D" uid="uid://b36ifskhaht75" path="res://assets/sprites/person.png" id="1_7g1rn"]
 [ext_resource type="Script" uid="uid://cfbnye70hhhx1" path="res://scripts/person.gd" id="1_y1hso"]
+[ext_resource type="Texture2D" uid="uid://duok8sycbk74m" path="res://assets/sprites/person_smile.png" id="3_kt4bc"]
+[ext_resource type="AudioStream" uid="uid://c4nd4eprt71f5" path="res://assets/sfx/sample.wav" id="4_5v5nk"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_7g1rn"]
 
@@ -12,7 +14,14 @@
 [node name="Person" type="CharacterBody3D" groups=["photogenic"]]
 script = ExtResource("1_y1hso")
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="SmileSprite" type="Sprite3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+visible = false
+billboard = 2
+texture_filter = 0
+texture = ExtResource("3_kt4bc")
+
+[node name="IdleSprite" type="Sprite3D" parent="."]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 billboard = 2
 texture_filter = 0
@@ -36,5 +45,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 visible = false
 billboard = 1
 text = "SEE THE CAMERA!"
-font_size = 32
 outline_size = 8
+
+[node name="SmilePlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_5v5nk")
+volume_db = -17.119
