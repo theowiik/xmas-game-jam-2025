@@ -13,9 +13,8 @@ shape = SubResource("CapsuleShape3D_eqqp1")
 [node name="ViewPivot" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.870246)
 
-[node name="Camera3D" type="Camera3D" parent="ViewPivot"]
-current = true
-fov = 64.422035
-
 [node name="DesiredCameraPosition" type="Marker3D" parent="ViewPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.8858592)
+
+[node name="Camera3D" type="Camera3D" parent="ViewPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.16453296)

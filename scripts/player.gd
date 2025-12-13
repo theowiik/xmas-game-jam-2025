@@ -9,7 +9,7 @@ var jump_velocity: float = 4.5
 var gravity: float = 9.82
 var speed: float = 5.0
 
-var rotation_smoothing: float = 5.0
+var player_rotation_smoothing: float = 5.0
 var camera_position_smoothing: float = 15.0
 var camera_rotation_smoothing: float = 15.0
 
@@ -46,8 +46,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func smooth_rotation(delta: float) -> void:
-	rotation.y = lerp_angle(rotation.y, target_rotation_y, rotation_smoothing * delta)
-	current_rotation_x = lerp(current_rotation_x, target_rotation_x, rotation_smoothing * delta)
+	rotation.y = lerp_angle(rotation.y, target_rotation_y, player_rotation_smoothing * delta)
+	current_rotation_x = lerp(current_rotation_x, target_rotation_x, player_rotation_smoothing * delta)
 	view_pivot.rotation.x = current_rotation_x
 
 
@@ -75,9 +75,11 @@ func smooth_camera(delta: float) -> void:
 		desired_camera_position.global_position, camera_position_smoothing * delta
 	)
 
-	camera.global_rotation = camera.global_rotation.lerp(
-		desired_camera_position.global_rotation, camera_rotation_smoothing * delta
-	)
+	# Use quaternion slerp for proper rotation interpolation (avoids 360° spins)
+	var current_quat := camera.global_transform.basis.get_rotation_quaternion()
+	var target_quat := desired_camera_position.global_transform.basis.get_rotation_quaternion()
+	var interpolated_quat := current_quat.slerp(target_quat, camera_rotation_smoothing * delta)
+	camera.global_transform.basis = Basis(interpolated_quat)
 
 
 func move(delta: float) -> void:
