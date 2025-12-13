@@ -1,12 +1,56 @@
 extends CharacterBody3D
 
 @onready var agent: NavigationAgent3D = $NavigationAgent3D
+@onready var sprite: Sprite3D = $Sprite3D
+@onready var see_camera_label: Label3D = $SeeCameraLabel
 var speed: float = 5.0
 var min_wait_time: float = 0.5
 var max_wait_time: float = 2.0
 var wait_time: float = 0.0
 var current_wait_time: float = 0.0
 var is_waiting: bool = false
+
+var camera: Node3D = null
+var default_color: Color = Color.WHITE
+var in_frame_color: Color = Color(0.3, 1.0, 0.3)  # Green tint
+var centered_color: Color = Color(1.0, 1.0, 0.3)  # Yellow tint
+
+
+func _ready() -> void:
+	# Camera reference will be set by Main.gd
+	pass
+
+
+func _process(_delta: float) -> void:
+	if camera == null:
+		return
+
+	# Check if we're in the camera's view
+	if camera._is_in_camera_view(self):
+		var cam = camera.get_node("SubViewport/Camera3D")
+		var sub_viewport = camera.get_node("SubViewport")
+		var viewport_size: Vector2 = sub_viewport.get_visible_rect().size
+
+		# Get screen position
+		var screen_pos: Vector2 = cam.unproject_position(global_position)
+		var normalized_pos: Vector2 = screen_pos / viewport_size
+
+		# Calculate distance from center
+		var center_offset: Vector2 = normalized_pos - Vector2(0.5, 0.5)
+		var center_distance: float = center_offset.length()
+
+		# If centered (within a small threshold), use centered color and show label
+		if center_distance < 0.15:  # Roughly centered
+			sprite.modulate = centered_color
+			see_camera_label.visible = true
+		else:
+			# Just in frame, use in-frame color
+			sprite.modulate = in_frame_color
+			see_camera_label.visible = false
+	else:
+		# Not in frame, use default color
+		sprite.modulate = default_color
+		see_camera_label.visible = false
 
 
 func _unhandled_input(event: InputEvent) -> void:

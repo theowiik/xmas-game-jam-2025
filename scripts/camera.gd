@@ -72,7 +72,7 @@ func _is_in_camera_view(node: Node3D) -> bool:
 	var screen_pos: Vector2 = camera.unproject_position(obj_pos)
 	var viewport_size: Vector2 = sub_viewport.get_visible_rect().size
 
-	var margin: float = 100.0
+	var margin: float = 0.0  # No margin - must be actually visible in viewport
 	if screen_pos.x < -margin or screen_pos.x > viewport_size.x + margin:
 		return false
 	if screen_pos.y < -margin or screen_pos.y > viewport_size.y + margin:
