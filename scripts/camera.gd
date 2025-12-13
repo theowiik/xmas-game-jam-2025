@@ -28,7 +28,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _take_photo() -> void:
 	print("I took a photo of...")
 	_find_objects_in_view()
-	# _save_photo()
+	_save_photo()
 
 func _find_objects_in_view() -> void:
 	var photogenic_objects: Array[Node] = get_tree().get_nodes_in_group("photogenic")
