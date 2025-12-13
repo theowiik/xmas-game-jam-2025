@@ -2,6 +2,7 @@ class_name Player extends CharacterBody3D
 
 @onready var view_pivot: Node3D = $ViewPivot
 @onready var desired_camera_position: Node3D = $ViewPivot/DesiredCameraPosition
+@onready var photo_info_label: RichTextLabel = $ViewPivot/Camera3D/CanvasGroup/PhotoInfoLabel
 
 var camera: Node3D = null
 
@@ -34,6 +35,11 @@ var previous_rotation_y: float = 0.0
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+	# Find and connect to the camera signal
+	camera = get_node("../Camera")
+	if camera:
+		camera.photo_taken.connect(_on_photo_taken)
 
 
 func _process(delta: float) -> void:
@@ -151,3 +157,20 @@ func move(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, speed)
 
 	move_and_slide()
+
+
+func _on_photo_taken(detected_objects: Array[Dictionary], fov: float) -> void:
+	photo_info_label.clear()
+	print("[PLAYER] Photo taken with FOV: %.1f" % fov)
+
+	photo_info_label.append_text("Photo Info:\n")
+	photo_info_label.append_text("FOV: %.1f\n" % fov)
+
+	if detected_objects.is_empty():
+		photo_info_label.append_text("[color=gray]Bad photo :([/color]\n")
+	else:
+		for obj_data in detected_objects:
+			photo_info_label.append_text(
+				"[color=green]%s (%.1fm away)[/color]\n" % [obj_data.name, obj_data.distance]
+			)
+			print("[PLAYER] - Captured: %s (%.1fm away)" % [obj_data.name, obj_data.distance])

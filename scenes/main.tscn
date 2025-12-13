@@ -34,15 +34,6 @@ shape = SubResource("BoxShape3D_o5qli")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 mesh = SubResource("BoxMesh_o5qli")
 
-[node name="Node3D" parent="." instance=ExtResource("2_0wfyh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3563247, 0, -4.2235384)
-
-[node name="Node3D3" parent="." instance=ExtResource("2_0wfyh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.694105, 0, -4.6321945)
-
-[node name="Node3D4" parent="." instance=ExtResource("2_0wfyh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.4638567, 0, 4.3397207)
-
 [node name="Store" parent="." instance=ExtResource("3_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.700038, 1.1580691, -2.2665484)
 
@@ -53,3 +44,12 @@ light_cull_mask = 4293918721
 
 [node name="Tree" parent="." instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9814558, 2.7003293, -12.030553)
+
+[node name="Tree2" parent="." instance=ExtResource("4_jyhfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3780346, 2.872077, 16.122593)
+
+[node name="Person" parent="." instance=ExtResource("2_0wfyh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.329944, -0.07997465, 3.830927)
+
+[node name="Person2" parent="." instance=ExtResource("2_0wfyh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.126145, -0.07997465, -5.84659)

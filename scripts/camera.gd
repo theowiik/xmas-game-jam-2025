@@ -1,5 +1,7 @@
 extends Node3D
 
+signal photo_taken(detected_objects: Array[Dictionary], fov: float)
+
 @onready var sub_viewport: SubViewport = $SubViewport
 @onready var camera: Camera3D = $SubViewport/Camera3D
 @onready var camera_pos: Node3D = $CameraPos
@@ -45,13 +47,7 @@ func _find_objects_in_view() -> void:
 
 	detected_objects.sort_custom(func(a, b): return a.distance < b.distance)
 
-	print("\n=== Photo Contents ===")
-	if detected_objects.is_empty():
-		print("Nothing interesting in frame")
-	else:
-		for obj_data in detected_objects:
-			print("  - %s (%.1fm away)" % [obj_data.name, obj_data.distance])
-	print("======================\n")
+	photo_taken.emit(detected_objects, camera.fov)
 
 
 func _is_in_camera_view(node: Node3D) -> bool:
