@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ovaec6nc7m42"]
+[gd_scene load_steps=12 format=3 uid="uid://ovaec6nc7m42"]
 
 [ext_resource type="PackedScene" uid="uid://wilclsh64myp" path="res://objects/player.tscn" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://cejjqp3bc5p8i" path="res://scripts/main.gd" id="1_tefeu"]
@@ -6,10 +6,20 @@
 [ext_resource type="PackedScene" uid="uid://db8ym36hjqs6c" path="res://objects/store.tscn" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://bn1if5g85g55r" path="res://objects/tree.tscn" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://c2pay3j4jqds6" path="res://objects/camera.tscn" id="5_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://co5yey2y7yboh" path="res://assets/icon.svg" id="7_o6xl0"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_tefeu"]
 vertices = PackedVector3Array(-24.5, 1, -24.5, -24.5, 1, 24.5, 24.5, 1, 24.5, 24.5, 1, -24.5)
 polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="BoxMesh" id="BoxMesh_tefeu"]
+size = Vector3(100, 1, 70.71)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tipki"]
+albedo_texture = ExtResource("7_o6xl0")
+
+[sub_resource type="QuadMesh" id="QuadMesh_85g3d"]
+material = SubResource("StandardMaterial3D_tipki")
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_tefeu")
@@ -101,3 +111,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.831331, 1.5673804, -21.525
 
 [node name="Tree6" parent="Trees" instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6154099, 1.6130638, -22.05763)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.8696156, -0.49372938, 0, 0.49372938, 0.8696156, -2.4561539, 11.564413, -46.99035)
+mesh = SubResource("BoxMesh_tefeu")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.8694949, 0.49394187, 0, -0.49394187, 0.8694949, -2.4561539, 11.564413, 47.047623)
+mesh = SubResource("BoxMesh_tefeu")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, -0.4939419, 0.8694949, 0, 0.86949503, 0.49394196, -1.0000001, 2.1590887e-08, -3.800683e-08, 47.37237, 11.564413, -2.4120293)
+mesh = SubResource("BoxMesh_tefeu")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.3711395e-08, 0.49394187, -0.8694949, 0, 0.86949503, 0.49394196, 1.0000001, 2.1590884e-08, -3.800683e-08, -47.254272, 11.564413, -2.4120293)
+mesh = SubResource("BoxMesh_tefeu")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18.873104, 0)
+mesh = SubResource("QuadMesh_85g3d")
