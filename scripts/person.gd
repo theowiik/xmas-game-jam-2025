@@ -1,7 +1,8 @@
 extends CharacterBody3D
 
 @onready var agent: NavigationAgent3D = $NavigationAgent3D
-@onready var sprite: Sprite3D = $Sprite3D
+@onready var idle_sprite: Sprite3D = $IdleSprite
+@onready var smile_sprite: Sprite3D = $SmileSprite
 @onready var see_camera_label: Label3D = $SeeCameraLabel
 var speed: float = 5.0
 var min_wait_time: float = 0.5
@@ -14,7 +15,6 @@ var camera: Node3D = null
 var default_color: Color = Color.WHITE
 var in_frame_color: Color = Color(0.3, 1.0, 0.3)  # Green tint
 var centered_color: Color = Color(1.0, 1.0, 0.3)  # Yellow tint
-
 
 func _ready() -> void:
 	# Camera reference will be set by Main.gd
@@ -39,17 +39,23 @@ func _process(_delta: float) -> void:
 		var center_offset: Vector2 = normalized_pos - Vector2(0.5, 0.5)
 		var center_distance: float = center_offset.length()
 
-		# If centered (within a small threshold), use centered color and show label
+		# If centered (within a small threshold), show smile sprite
 		if center_distance < 0.15:  # Roughly centered
-			sprite.modulate = centered_color
+			smile_sprite.visible = true
+			idle_sprite.visible = false
+			smile_sprite.modulate = centered_color
 			see_camera_label.visible = true
 		else:
-			# Just in frame, use in-frame color
-			sprite.modulate = in_frame_color
+			# Just in frame, show idle sprite with green tint
+			smile_sprite.visible = false
+			idle_sprite.visible = true
+			idle_sprite.modulate = in_frame_color
 			see_camera_label.visible = false
 	else:
-		# Not in frame, use default color
-		sprite.modulate = default_color
+		# Not in frame, show idle sprite with default color
+		smile_sprite.visible = false
+		idle_sprite.visible = true
+		idle_sprite.modulate = default_color
 		see_camera_label.visible = false
 
 
