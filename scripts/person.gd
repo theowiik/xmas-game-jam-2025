@@ -15,9 +15,6 @@ var is_waiting: bool = false
 var is_smiling: bool = false
 
 var camera: Node3D = null
-var default_color: Color = Color.WHITE
-var in_frame_color: Color = Color(0.3, 1.0, 0.3)  # Green tint
-var centered_color: Color = Color(1.0, 1.0, 0.3)  # Yellow tint
 
 # Smile FOV thresholds - at reference distance, FOV must be <= this to smile
 var reference_distance: float = 5.0  # Distance at which reference FOV is used
@@ -60,7 +57,6 @@ func _process(_delta: float) -> void:
 		if center_distance < 0.15 and is_zoomed_enough:  # Roughly centered and zoomed enough
 			smile_sprite.visible = true
 			idle_sprite.visible = false
-			smile_sprite.modulate = centered_color
 			see_camera_label.visible = true
 
 			# Play smile sound when starting to smile
@@ -68,17 +64,15 @@ func _process(_delta: float) -> void:
 				smile_player.play()
 				is_smiling = true
 		else:
-			# Just in frame, show idle sprite with green tint
+			# Just in frame, show idle sprite
 			smile_sprite.visible = false
 			idle_sprite.visible = true
-			idle_sprite.modulate = in_frame_color
 			see_camera_label.visible = false
 			is_smiling = false
 	else:
-		# Not in frame, show idle sprite with default color
+		# Not in frame, show idle sprite
 		smile_sprite.visible = false
 		idle_sprite.visible = true
-		idle_sprite.modulate = default_color
 		see_camera_label.visible = false
 		is_smiling = false
 
