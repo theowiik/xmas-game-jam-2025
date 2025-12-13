@@ -30,4 +30,11 @@ visible = false
 mesh = SubResource("CapsuleMesh_y1hso")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-debug_enabled = true
+
+[node name="SeeCameraLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+visible = false
+billboard = 1
+text = "SEE THE CAMERA!"
+font_size = 32
+outline_size = 8
