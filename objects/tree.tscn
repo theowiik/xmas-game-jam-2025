@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bh71en6tllg5i" path="res://assets/sprites/tree.png" id="1_j00qk"]
 
-[node name="Tree" type="StaticBody3D"]
+[node name="Tree" type="StaticBody3D" groups=["photogenic"]]
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.32, 0, 0, 0, 0.32, 0, 0, 0, 0.32, 0, 0, 0)

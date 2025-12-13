@@ -17,7 +17,7 @@ shape = SubResource("CapsuleShape3D_eqqp1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.870246)
 
 [node name="DesiredCameraPosition" type="Marker3D" parent="ViewPivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.8858592)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.4039176)
 
 [node name="ReferenceCamera" type="MeshInstance3D" parent="ViewPivot/DesiredCameraPosition"]
 visible = false

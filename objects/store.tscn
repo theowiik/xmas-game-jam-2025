@@ -7,7 +7,7 @@ size = Vector3(5.542, 2.547, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_oumfq"]
 
-[node name="Node3D" type="StaticBody3D"]
+[node name="Store" type="StaticBody3D" groups=["photogenic"]]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_nr3ms")
