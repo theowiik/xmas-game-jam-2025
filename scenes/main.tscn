@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ovaec6nc7m42"]
+[gd_scene load_steps=8 format=3 uid="uid://ovaec6nc7m42"]
 
 [ext_resource type="PackedScene" uid="uid://wilclsh64myp" path="res://objects/player.tscn" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://cejjqp3bc5p8i" path="res://scripts/main.gd" id="1_tefeu"]
@@ -7,15 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://bn1if5g85g55r" path="res://objects/tree.tscn" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://c2pay3j4jqds6" path="res://objects/camera.tscn" id="5_tbgi4"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_o5qli"]
-size = Vector3(52.07866, 1, 43.34694)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o5qli"]
-albedo_color = Color(0.83874166, 0.8673098, 0.86961716, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_o5qli"]
-material = SubResource("StandardMaterial3D_o5qli")
-size = Vector3(46.21, 1, 40.345)
+[sub_resource type="NavigationMesh" id="NavigationMesh_tefeu"]
+vertices = PackedVector3Array(-24.5, 1, -24.5, -24.5, 1, 24.5, 24.5, 1, 24.5, 24.5, 1, -24.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_tefeu")
@@ -25,17 +19,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2562381, 0)
 
 [node name="Camera" parent="." instance=ExtResource("5_tbgi4")]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.7621403, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("BoxShape3D_o5qli")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-mesh = SubResource("BoxMesh_o5qli")
-
 [node name="Store" parent="." instance=ExtResource("3_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.700038, 1.1580691, -2.2665484)
+
+[node name="Store2" parent="." instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.068752, 1.1580691, 6.3805304)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.25881907, 0.9659258, 0, -0.9659258, 0.25881907, 0, 9.349139, 0)
@@ -53,3 +41,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.329944, -0.07997465, 3.8309
 
 [node name="Person2" parent="." instance=ExtResource("2_0wfyh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.126145, -0.07997465, -5.84659)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.6872008, 0)
+navigation_mesh = SubResource("NavigationMesh_tefeu")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D"]
+use_collision = true
+size = Vector3(50, 1, 50)

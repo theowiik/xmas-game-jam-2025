@@ -1,12 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://ka2ji00su2ft"]
+[gd_scene load_steps=6 format=3 uid="uid://ka2ji00su2ft"]
 
 [ext_resource type="Texture2D" uid="uid://b36ifskhaht75" path="res://assets/sprites/person.png" id="1_7g1rn"]
+[ext_resource type="Script" uid="uid://cfbnye70hhhx1" path="res://scripts/person.gd" id="1_y1hso"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_7g1rn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7g1rn"]
 
-[node name="Person" type="StaticBody3D" groups=["photogenic"]]
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_y1hso"]
+
+[node name="Person" type="CharacterBody3D" groups=["photogenic"]]
+script = ExtResource("1_y1hso")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
@@ -20,3 +24,10 @@ mesh = SubResource("CapsuleMesh_7g1rn")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_7g1rn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("CapsuleMesh_y1hso")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+debug_enabled = true
