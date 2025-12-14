@@ -61,4 +61,4 @@ autoplay = "idle"
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4056163, 0)
-light_energy = 2.0
+light_energy = 3.0

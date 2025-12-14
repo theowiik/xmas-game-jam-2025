@@ -9,8 +9,10 @@
 background_mode = 1
 background_color = Color(1, 1, 1, 1)
 fog_enabled = true
-fog_density = 0.0401
+fog_light_color = Color(1, 1, 1, 1)
+fog_light_energy = 0.59
 volumetric_fog_enabled = true
+volumetric_fog_density = 0.0285
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_exrbp"]
 albedo_color = Color(0.24477637, 0.2447764, 0.24477637, 1)
@@ -44,6 +46,11 @@ fov = 81.31556
 [node name="CanvasLayer" type="CanvasLayer" parent="SubViewport"]
 scale = Vector2(0.106, 0.106)
 transform = Transform2D(0.106, 0, 0, 0.106, 0, 0)
+
+[node name="ColorRect" type="ColorRect" parent="SubViewport/CanvasLayer"]
+offset_right = 1641.5094
+offset_bottom = 1216.9811
+color = Color(0, 0, 0, 0.23200001)
 
 [node name="FovLabel" type="Label" parent="SubViewport/CanvasLayer"]
 offset_left = 311.32074

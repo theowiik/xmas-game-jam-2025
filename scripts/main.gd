@@ -201,7 +201,7 @@ func _print_photo_data_animated(
 	if score >= 80:
 		score_color = "green"
 	elif score >= 60:
-		score_color = "yellow"
+		score_color = "#B8860B"
 	elif score >= 40:
 		score_color = "orange"
 
