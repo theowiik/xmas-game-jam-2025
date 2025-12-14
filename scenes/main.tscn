@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ovaec6nc7m42"]
+[gd_scene load_steps=19 format=3 uid="uid://ovaec6nc7m42"]
 
 [ext_resource type="PackedScene" uid="uid://wilclsh64myp" path="res://objects/player.tscn" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://cejjqp3bc5p8i" path="res://scripts/main.gd" id="1_tefeu"]
@@ -10,6 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://dyj8ewbyba7rm" path="res://assets/sprites/snowflake.png" id="7_o6xl0"]
 [ext_resource type="AudioStream" uid="uid://bwyabkpmix67f" path="res://assets/sfx/SoundTrackMainLoop.wav" id="8_tipki"]
 [ext_resource type="PackedScene" uid="uid://durj14btm6cw2" path="res://scenes/photos_hud.tscn" id="9_85g3d"]
+[ext_resource type="PackedScene" uid="uid://buwhyptpxk0l8" path="res://objects/actor.tscn" id="11_ya4ey"]
+[ext_resource type="PackedScene" uid="uid://bqqsbe07jf0b" path="res://objects/santa.tscn" id="12_eb6dy"]
+[ext_resource type="PackedScene" uid="uid://bdhuic5yebw8j" path="res://objects/reindeer.tscn" id="13_trceg"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_tefeu"]
 vertices = PackedVector3Array(-24.5, 1, -24.5, -24.5, 1, 24.5, 24.5, 1, 24.5, 24.5, 1, -24.5)
@@ -273,3 +276,14 @@ shape = SubResource("BoxShape3D_choun")
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="Node3D"]
 transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 0.7004242, 1.54883, -23.958336)
 shape = SubResource("BoxShape3D_choun")
+
+[node name="Actors" type="Node3D" parent="."]
+
+[node name="Actor" parent="Actors" instance=ExtResource("11_ya4ey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7848, 0, -11.219828)
+
+[node name="Santa" parent="Actors" instance=ExtResource("12_eb6dy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.379417, 0, 22.20651)
+
+[node name="Actor2" parent="Actors" instance=ExtResource("13_trceg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.740797, 9.536743e-07, -19.301872)

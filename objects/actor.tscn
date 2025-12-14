@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://buwhyptpxk0l8"]
+
+[ext_resource type="Script" uid="uid://7tmd8cmi1oid" path="res://scripts/actor.gd" id="1_ekr5v"]
+[ext_resource type="Texture2D" uid="uid://dyj8ewbyba7rm" path="res://assets/sprites/snowflake.png" id="2_x1cjf"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4l3vp"]
+
+[node name="Actor" type="CharacterBody3D"]
+script = ExtResource("1_ekr5v")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_4l3vp")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = ExtResource("2_x1cjf")
