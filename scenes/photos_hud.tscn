@@ -83,55 +83,54 @@ theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_4mkn1")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_aa2cs")
 text = "⏻"
 
-[node name="PhotoTexture" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 441.0
-offset_top = 311.0
-offset_right = 1053.0
-offset_bottom = 794.0
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
-layout_mode = 0
-offset_right = 1098.0
-offset_bottom = 1193.0
+[node name="PhotosContainer" type="GridContainer" parent="CenterContainer"]
+layout_mode = 2
+mouse_filter = 2
+columns = 3
 
-[node name="PhotosContainer" type="VBoxContainer" parent="ScrollContainer"]
+[node name="PhotoSummaryCard5" parent="CenterContainer/PhotosContainer" instance=ExtResource("2_4vmy6")]
 layout_mode = 2
 
-[node name="PhotoSummaryCard" parent="ScrollContainer/PhotosContainer" instance=ExtResource("2_4vmy6")]
+[node name="PhotoSummaryCard6" parent="CenterContainer/PhotosContainer" instance=ExtResource("2_4vmy6")]
 layout_mode = 2
 
-[node name="PhotoSummaryCard5" parent="ScrollContainer/PhotosContainer" instance=ExtResource("2_4vmy6")]
+[node name="PhotoSummaryCard7" parent="CenterContainer/PhotosContainer" instance=ExtResource("2_4vmy6")]
 layout_mode = 2
 
-[node name="PhotoSummaryCard6" parent="ScrollContainer/PhotosContainer" instance=ExtResource("2_4vmy6")]
+[node name="PhotoSummaryCard8" parent="CenterContainer/PhotosContainer" instance=ExtResource("2_4vmy6")]
 layout_mode = 2
 
-[node name="PhotoSummaryCard7" parent="ScrollContainer/PhotosContainer" instance=ExtResource("2_4vmy6")]
+[node name="PhotoSummaryCard9" parent="CenterContainer/PhotosContainer" instance=ExtResource("2_4vmy6")]
 layout_mode = 2
 
-[node name="PhotoSummaryCard8" parent="ScrollContainer/PhotosContainer" instance=ExtResource("2_4vmy6")]
+[node name="PhotoSummaryCard10" parent="CenterContainer/PhotosContainer" instance=ExtResource("2_4vmy6")]
 layout_mode = 2
 
-[node name="PhotoSummaryCard9" parent="ScrollContainer/PhotosContainer" instance=ExtResource("2_4vmy6")]
+[node name="PhotoSummaryCard11" parent="CenterContainer/PhotosContainer" instance=ExtResource("2_4vmy6")]
 layout_mode = 2
 
-[node name="PhotoSummaryCard10" parent="ScrollContainer/PhotosContainer" instance=ExtResource("2_4vmy6")]
+[node name="PhotoSummaryCard12" parent="CenterContainer/PhotosContainer" instance=ExtResource("2_4vmy6")]
 layout_mode = 2
 
-[node name="PhotoSummaryCard11" parent="ScrollContainer/PhotosContainer" instance=ExtResource("2_4vmy6")]
+[node name="PhotoSummaryCard2" parent="CenterContainer/PhotosContainer" instance=ExtResource("2_4vmy6")]
 layout_mode = 2
 
-[node name="PhotoSummaryCard12" parent="ScrollContainer/PhotosContainer" instance=ExtResource("2_4vmy6")]
+[node name="PhotoSummaryCard3" parent="CenterContainer/PhotosContainer" instance=ExtResource("2_4vmy6")]
 layout_mode = 2
 
-[node name="PhotoSummaryCard2" parent="ScrollContainer/PhotosContainer" instance=ExtResource("2_4vmy6")]
+[node name="PhotoSummaryCard4" parent="CenterContainer/PhotosContainer" instance=ExtResource("2_4vmy6")]
 layout_mode = 2
 
-[node name="PhotoSummaryCard3" parent="ScrollContainer/PhotosContainer" instance=ExtResource("2_4vmy6")]
-layout_mode = 2
-
-[node name="PhotoSummaryCard4" parent="ScrollContainer/PhotosContainer" instance=ExtResource("2_4vmy6")]
+[node name="PhotoSummaryCard" parent="CenterContainer/PhotosContainer" instance=ExtResource("2_4vmy6")]
 layout_mode = 2
 
 [connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]

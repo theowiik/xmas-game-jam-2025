@@ -1,22 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://beergix2q71jb"]
+[gd_scene load_steps=3 format=3 uid="uid://beergix2q71jb"]
 
 [ext_resource type="Texture2D" uid="uid://co5yey2y7yboh" path="res://assets/icon.svg" id="1_eplgk"]
+[ext_resource type="FontFile" uid="uid://c3wwox8ac8j68" path="res://assets/fonts/VT323-Regular.ttf" id="2_13apf"]
 
 [node name="PhotoSummaryCard" type="VBoxContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -1103.0
+offset_right = -752.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 texture = ExtResource("1_eplgk")
+expand_mode = 5
 
 [node name="Label" type="RichTextLabel" parent="."]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_13apf")
+theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "this is a photo"
 fit_content = true

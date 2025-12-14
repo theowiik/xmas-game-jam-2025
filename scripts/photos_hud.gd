@@ -1,7 +1,6 @@
 extends Control
 
-@onready var photo_texture: TextureRect = $PhotoTexture
-@onready var photos_container: VBoxContainer = $ScrollContainer/PhotosContainer
+@onready var photos_container: GridContainer = $CenterContainer/PhotosContainer
 
 const PHOTO_SUMMARY_CARD = preload("res://objects/photo_summary_card.tscn")
 
@@ -62,4 +61,10 @@ func add_photo(texture: ImageTexture, score: int, detected_objects: Array[Dictio
 
 
 func _on_exit_button_pressed() -> void:
+	# Open the photos directory in the native file explorer
+	var photos_dir: String = ProjectSettings.globalize_path("user://")
+	OS.shell_open(photos_dir)
+
+	# Wait a moment to ensure the file explorer opens before quitting
+	await get_tree().create_timer(0.2).timeout
 	get_tree().quit()

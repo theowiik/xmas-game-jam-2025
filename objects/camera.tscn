@@ -7,7 +7,9 @@
 
 [sub_resource type="Environment" id="Environment_n8nd1"]
 background_mode = 1
-background_color = Color(0.5681936, 0.40494525, 0.536832, 1)
+background_color = Color(1, 1, 1, 1)
+fog_enabled = true
+fog_density = 0.0401
 volumetric_fog_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_exrbp"]

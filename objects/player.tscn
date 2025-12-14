@@ -9,6 +9,9 @@
 size = Vector3(0.6, 0.3, 0.2)
 
 [sub_resource type="Environment" id="Environment_eqqp1"]
+background_mode = 1
+background_color = Color(1, 1, 1, 1)
+background_energy_multiplier = 0.7
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_ykyjo"]
 dof_blur_far_enabled = true

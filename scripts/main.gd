@@ -22,6 +22,15 @@ func _ready() -> void:
 			person.camera = camera
 
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		# Open the photos directory when closing via window X button
+		var photos_dir: String = ProjectSettings.globalize_path("user://")
+		OS.shell_open(photos_dir)
+		await get_tree().create_timer(0.2).timeout
+		get_tree().quit()
+
+
 func _calculate_photo_score(detected_objects: Array[Dictionary], fov: float) -> Dictionary:
 	if detected_objects.is_empty():
 		return {"score": 0, "breakdown": {}}
