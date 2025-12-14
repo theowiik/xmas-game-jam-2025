@@ -269,11 +269,11 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.16
 shape = SubResource("BoxShape3D_choun")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="Node3D"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 23.755821, 1.54883, -0.09093857)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 25.263739, 1.54883, -0.09093857)
 shape = SubResource("BoxShape3D_choun")
 
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="Node3D"]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 0.7004242, 1.54883, -23.958336)
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 0.7004242, 1.54883, -25.158337)
 shape = SubResource("BoxShape3D_choun")
 
 [node name="Actors" type="Node3D" parent="."]
