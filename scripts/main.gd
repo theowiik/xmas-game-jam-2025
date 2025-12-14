@@ -250,3 +250,7 @@ func _print_photo_data_animated(
 	printer_player.play()
 	pitch_index += 1
 	await get_tree().create_timer(line_delay).timeout
+
+
+func _on_oob_body_entered(body: Node3D) -> void:
+	body.global_position = Vector3(0, 5, 0)

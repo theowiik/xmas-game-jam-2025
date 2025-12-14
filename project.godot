@@ -21,7 +21,6 @@ config/icon="uid://dvf07o3dk6kwt"
 
 window/size/viewport_width=1600
 window/size/viewport_height=1200
-window/size/maximize_disabled=true
 window/stretch/mode="canvas_items"
 
 [global_group]

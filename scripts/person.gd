@@ -5,7 +5,17 @@ extends CharacterBody3D
 @onready var smile_sprite: Sprite3D = $SmileSprite
 @onready var smile_player: AudioStreamPlayer3D = $SmilePlayer
 
-var smile_sounds: Array[AudioStream] = []
+var smile_sounds: Array[AudioStream] = [
+	preload("res://assets/sfx/smile/smile1.wav"),
+	preload("res://assets/sfx/smile/smile2.wav"),
+	preload("res://assets/sfx/smile/smile3.wav"),
+	preload("res://assets/sfx/smile/smile4.wav"),
+	preload("res://assets/sfx/smile/smile5.wav"),
+	preload("res://assets/sfx/smile/smile6.wav"),
+	preload("res://assets/sfx/smile/smile7.wav"),
+	preload("res://assets/sfx/smile/smile8.wav"),
+	preload("res://assets/sfx/smile/smile9.wav")
+]
 
 var speed: float = 5.0
 var min_wait_time: float = 0.5
@@ -24,19 +34,7 @@ var reference_fov: float = 50.0  # FOV threshold at reference distance
 
 func _ready() -> void:
 	# Camera reference will be set by Main.gd
-
-	# Load all .wav files from the smile directory
-	var dir = DirAccess.open("res://assets/sfx/smile")
-	if dir:
-		dir.list_dir_begin()
-		var file_name = dir.get_next()
-		while file_name != "":
-			if not dir.current_is_dir() and file_name.ends_with(".wav"):
-				var sound = load("res://assets/sfx/smile/" + file_name)
-				if sound:
-					smile_sounds.append(sound)
-			file_name = dir.get_next()
-		dir.list_dir_end()
+	pass
 
 
 func _process(_delta: float) -> void:
