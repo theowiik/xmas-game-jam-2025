@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ovaec6nc7m42"]
+[gd_scene load_steps=16 format=3 uid="uid://ovaec6nc7m42"]
 
 [ext_resource type="PackedScene" uid="uid://wilclsh64myp" path="res://objects/player.tscn" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://cejjqp3bc5p8i" path="res://scripts/main.gd" id="1_tefeu"]
@@ -31,6 +31,9 @@ size = Vector2(0.2, 0.2)
 [sub_resource type="BoxMesh" id="BoxMesh_tefeu"]
 size = Vector3(100, 1, 70.71)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_choun"]
+size = Vector3(1, 4.0976563, 64.09534)
+
 [node name="Main" type="Node3D"]
 script = ExtResource("1_tefeu")
 
@@ -39,12 +42,6 @@ stream = ExtResource("2_choun")
 volume_db = 10.0
 
 [node name="Camera" parent="." instance=ExtResource("5_tbgi4")]
-
-[node name="Store" parent="." instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.700038, 0.06974077, -2.2665484)
-
-[node name="Store2" parent="." instance=ExtResource("3_sugp2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.068752, 0.091507435, 6.3805304)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.25881907, 0.9659258, 0, -0.9659258, 0.25881907, 0, 9.349139, 0)
@@ -107,12 +104,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.202977, -0.07997465, 9.749
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.806224, -0.07997465, -14.288605)
 
 [node name="Player" parent="." instance=ExtResource("1_o5qli")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2562381, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6795332, 0.554638, 11.101234)
 
 [node name="Trees" type="Node3D" parent="."]
 
 [node name="Tree2" parent="Trees" instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.438282, 1.625006, 13.8815565)
+
+[node name="Tree15" parent="Trees" instance=ExtResource("4_jyhfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9384766, 1.625006, -4.9425097)
+
+[node name="Tree16" parent="Trees" instance=ExtResource("4_jyhfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2696896, 1.625006, 13.888295)
+
+[node name="Tree17" parent="Trees" instance=ExtResource("4_jyhfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.286034, 1.625006, 3.511119)
 
 [node name="Tree11" parent="Trees" instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4793854, 10.159704, 38.931747)
@@ -217,3 +223,41 @@ skeleton = NodePath("../..")
 transform = Transform3D(-4.3711395e-08, 0.49394187, -0.8694949, 0.49372944, 0.75612646, 0.42953962, 0.86961573, -0.4292952, -0.24387369, -44.79812, 22.009626, 38.766003)
 mesh = SubResource("BoxMesh_tefeu")
 skeleton = NodePath("../..")
+
+[node name="Stores" type="Node3D" parent="."]
+
+[node name="Store" parent="Stores" instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.61341, 0.06974077, -16.560293)
+
+[node name="Store3" parent="Stores" instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.727649, 0.06974077, 2.301485)
+
+[node name="Store4" parent="Stores" instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.46123028, 0.06974077, -4.000497)
+
+[node name="Store5" parent="Stores" instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.46123028, 0.06974077, -4.000497)
+
+[node name="Store6" parent="Stores" instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.919225, 0.06974077, 19.719528)
+
+[node name="Store2" parent="Stores" instance=ExtResource("3_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.068752, 0.091507435, 6.3805304)
+
+[node name="Node3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.6924, 1.5488281, 2.3296509)
+shape = SubResource("BoxShape3D_choun")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Node3D"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.16471863, 1.54883, 23.807468)
+shape = SubResource("BoxShape3D_choun")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Node3D"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 23.755821, 1.54883, -0.09093857)
+shape = SubResource("BoxShape3D_choun")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="Node3D"]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 0.7004242, 1.54883, -23.958336)
+shape = SubResource("BoxShape3D_choun")

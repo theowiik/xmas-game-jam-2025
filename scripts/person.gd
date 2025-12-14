@@ -3,7 +3,6 @@ extends CharacterBody3D
 @onready var agent: NavigationAgent3D = $NavigationAgent3D
 @onready var idle_sprite: Sprite3D = $IdleSprite
 @onready var smile_sprite: Sprite3D = $SmileSprite
-@onready var see_camera_label: Label3D = $SeeCameraLabel
 @onready var smile_player: AudioStreamPlayer3D = $SmilePlayer
 
 var smile_sounds: Array[AudioStream] = []
@@ -71,7 +70,6 @@ func _process(_delta: float) -> void:
 		if center_distance < 0.15 and is_zoomed_enough:  # Roughly centered and zoomed enough
 			smile_sprite.visible = true
 			idle_sprite.visible = false
-			see_camera_label.visible = true
 
 			# Play random smile sound when starting to smile
 			if not is_smiling:
@@ -82,13 +80,11 @@ func _process(_delta: float) -> void:
 			# Just in frame, show idle sprite
 			smile_sprite.visible = false
 			idle_sprite.visible = true
-			see_camera_label.visible = false
 			is_smiling = false
 	else:
 		# Not in frame, show idle sprite
 		smile_sprite.visible = false
 		idle_sprite.visible = true
-		see_camera_label.visible = false
 		is_smiling = false
 
 

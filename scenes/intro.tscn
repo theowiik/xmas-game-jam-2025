@@ -31,26 +31,27 @@ autoplay = true
 
 [node name="Show1" type="Label" parent="."]
 layout_mode = 0
-offset_left = 158.0
-offset_top = 170.0
-offset_right = 1496.0
-offset_bottom = 442.0
+offset_left = 147.0
+offset_top = 104.0
+offset_right = 1485.0
+offset_bottom = 376.0
 theme_override_fonts/font = ExtResource("2_yjqpq")
 theme_override_font_sizes/font_size = 61
-text = "You are Peter Photo, the best photographer in town."
+text = "You are Peter Photo, the town's best photographer."
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Show2" type="Label" parent="."]
 layout_mode = 0
-offset_left = 135.0
-offset_top = 415.0
-offset_right = 1473.0
-offset_bottom = 687.0
+offset_left = 141.0
+offset_top = 375.0
+offset_right = 1479.0
+offset_bottom = 647.0
 theme_override_fonts/font = ExtResource("2_yjqpq")
 theme_override_font_sizes/font_size = 61
-text = "It's almost christmas, and there still arent
-christmas cards.."
+text = "Only 5 shots left, and the whole town needs their
+christmas cards. Explore, find the festive
+moments, and capture them."
 horizontal_alignment = 1
 vertical_alignment = 1
 

@@ -40,12 +40,5 @@ mesh = SubResource("CapsuleMesh_y1hso")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
-[node name="SeeCameraLabel" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-visible = false
-billboard = 1
-text = "SEE THE CAMERA!"
-outline_size = 8
-
 [node name="SmilePlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_5v5nk")
