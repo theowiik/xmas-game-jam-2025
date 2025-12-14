@@ -14,4 +14,5 @@ shape = SubResource("CapsuleShape3D_4l3vp")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
+billboard = 1
 texture = ExtResource("2_x1cjf")

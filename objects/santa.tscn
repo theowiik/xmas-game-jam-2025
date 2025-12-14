@@ -1,9 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://bqqsbe07jf0b"]
 
 [ext_resource type="PackedScene" uid="uid://buwhyptpxk0l8" path="res://objects/actor.tscn" id="1_mhcts"]
-[ext_resource type="Texture2D" uid="uid://dmo6qtlfqljl" path="res://assets/sprites/store.png" id="2_gekiv"]
+[ext_resource type="Texture2D" uid="uid://caj853fgej8i6" path="res://assets/sprites/santa.png" id="2_mhcts"]
 
 [node name="Santa" instance=ExtResource("1_mhcts")]
+pace = 6.0
 
 [node name="Sprite3D" parent="." index="2"]
-texture = ExtResource("2_gekiv")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.52378553, 0)
+texture_filter = 0
+texture = ExtResource("2_mhcts")

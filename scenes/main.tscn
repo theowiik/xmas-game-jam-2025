@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ovaec6nc7m42"]
+[gd_scene load_steps=18 format=3 uid="uid://ovaec6nc7m42"]
 
 [ext_resource type="PackedScene" uid="uid://wilclsh64myp" path="res://objects/player.tscn" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://cejjqp3bc5p8i" path="res://scripts/main.gd" id="1_tefeu"]
@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://dyj8ewbyba7rm" path="res://assets/sprites/snowflake.png" id="7_o6xl0"]
 [ext_resource type="AudioStream" uid="uid://bwyabkpmix67f" path="res://assets/sfx/SoundTrackMainLoop.wav" id="8_tipki"]
 [ext_resource type="PackedScene" uid="uid://durj14btm6cw2" path="res://scenes/photos_hud.tscn" id="9_85g3d"]
-[ext_resource type="PackedScene" uid="uid://buwhyptpxk0l8" path="res://objects/actor.tscn" id="11_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://bqqsbe07jf0b" path="res://objects/santa.tscn" id="12_eb6dy"]
 [ext_resource type="PackedScene" uid="uid://bdhuic5yebw8j" path="res://objects/reindeer.tscn" id="13_trceg"]
 
@@ -52,7 +51,7 @@ light_energy = 1.3
 light_cull_mask = 4293918721
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.6872008, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.009321213, -1.7348807, 0.005437851)
 navigation_mesh = SubResource("NavigationMesh_tefeu")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D"]
@@ -262,11 +261,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.068752, 0.091507435, 6.380
 [node name="Node3D" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.6924, 1.5488281, 2.3296509)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.372385, 1.5488281, 2.3296509)
 shape = SubResource("BoxShape3D_choun")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Node3D"]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.16471863, 1.54883, 23.807468)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.16471863, 1.54883, 25.90148)
 shape = SubResource("BoxShape3D_choun")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="Node3D"]
@@ -279,11 +278,20 @@ shape = SubResource("BoxShape3D_choun")
 
 [node name="Actors" type="Node3D" parent="."]
 
-[node name="Actor" parent="Actors" instance=ExtResource("11_ya4ey")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7848, 0, -11.219828)
-
 [node name="Santa" parent="Actors" instance=ExtResource("12_eb6dy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.379417, 0, 22.20651)
 
-[node name="Actor2" parent="Actors" instance=ExtResource("13_trceg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.740797, 9.536743e-07, -19.301872)
+[node name="Reindeer" parent="Actors" instance=ExtResource("13_trceg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.728499, 0, -18.867676)
+
+[node name="Reindeer2" parent="Actors" instance=ExtResource("13_trceg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.124703, 0, 17.619678)
+
+[node name="Reindeer3" parent="Actors" instance=ExtResource("13_trceg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.856418, 0, -11.929581)
+
+[node name="Reindeer4" parent="Actors" instance=ExtResource("13_trceg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.393059, -9.536743e-07, 13.877878)
+
+[node name="Reindeer5" parent="Actors" instance=ExtResource("13_trceg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5132446, -9.536743e-07, -19.30517)
