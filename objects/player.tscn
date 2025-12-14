@@ -19,6 +19,7 @@ dof_blur_near_distance = 0.01
 dof_blur_amount = 1.0
 
 [node name="Player" type="CharacterBody3D"]
+collision_mask = 9
 script = ExtResource("2_ykyjo")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

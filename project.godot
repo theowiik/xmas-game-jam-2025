@@ -10,15 +10,19 @@ config_version=5
 
 [application]
 
-config/name="Xmas Game Jam 2025"
-run/main_scene="uid://ovaec6nc7m42"
+config/name="Peter Photo's Photo Services LLC"
+run/main_scene="uid://csnyad3rpo1o6"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://assets/icon.svg"
+boot_splash/bg_color=Color(1, 1, 1, 1)
+boot_splash/image="uid://dvf07o3dk6kwt"
+config/icon="uid://dvf07o3dk6kwt"
 
 [display]
 
 window/size/viewport_width=1600
 window/size/viewport_height=1200
+window/size/maximize_disabled=true
+window/stretch/mode="canvas_items"
 
 [global_group]
 
