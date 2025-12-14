@@ -169,6 +169,7 @@ autoplay = true
 
 [node name="PhotosHUD" parent="." instance=ExtResource("9_85g3d")]
 visible = false
+z_index = 1
 
 [node name="Walls" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.8696156, -0.49372938, 0, 0.49372938, 0.8696156, -2.4561539, 11.564413, -46.99035)

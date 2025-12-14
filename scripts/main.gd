@@ -87,11 +87,26 @@ func _on_photo_taken(detected_objects: Array[Dictionary], fov: float, image: Ima
 	if detected_objects.is_empty():
 		photo_info_label.append_text("[color=gray]No subjects in frame[/color]\n")
 	else:
+		# Count objects by type (strip trailing numbers from names)
+		var object_counts: Dictionary = {}
 		for obj_data in detected_objects:
-			photo_info_label.append_text(
-				"[color=green]%s (%.1fm away)[/color]\n" % [obj_data.name, obj_data.distance]
-			)
+			var obj_name: String = obj_data.name
+			# Extract base type by removing trailing digits
+			var base_type: String = obj_name.rstrip("0123456789")
+			if object_counts.has(base_type):
+				object_counts[base_type] += 1
+			else:
+				object_counts[base_type] = 1
 			print("[MAIN] - Captured: %s (%.1fm away)" % [obj_data.name, obj_data.distance])
+
+		# Display counts on same line
+		var count_text: String = ""
+		for obj_type in object_counts.keys():
+			if count_text != "":
+				count_text += " "
+			count_text += "x%d %s" % [object_counts[obj_type], obj_type]
+
+		photo_info_label.append_text("[color=green]%s[/color]\n" % count_text)
 
 		# Display score breakdown
 		photo_info_label.append_text("\nScore Breakdown:\n")

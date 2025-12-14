@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://c2pay3j4jqds6"]
+[gd_scene load_steps=11 format=3 uid="uid://c2pay3j4jqds6"]
 
 [ext_resource type="Script" uid="uid://clb0vqw04aqg8" path="res://scripts/camera.gd" id="1_exrbp"]
 [ext_resource type="Texture2D" uid="uid://u4lj8u1271u8" path="res://assets/sprites/camera_hud.png" id="2_n8nd1"]
+[ext_resource type="FontFile" uid="uid://c3wwox8ac8j68" path="res://assets/fonts/VT323-Regular.ttf" id="2_q62vh"]
 [ext_resource type="AudioStream" uid="uid://bkgrjkchy4gxy" path="res://assets/sfx/shutter.wav" id="3_d7esd"]
 
 [sub_resource type="Environment" id="Environment_n8nd1"]
@@ -42,10 +43,16 @@ fov = 81.31556
 scale = Vector2(0.106, 0.106)
 transform = Transform2D(0.106, 0, 0, 0.106, 0, 0)
 
-[node name="Label" type="Label" parent="SubViewport/CanvasLayer"]
-offset_right = 40.0
-offset_bottom = 23.0
-text = "5/5"
+[node name="FovLabel" type="Label" parent="SubViewport/CanvasLayer"]
+offset_left = 311.32074
+offset_top = 896.2264
+offset_right = 1216.9811
+offset_bottom = 1028.3019
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("2_q62vh")
+theme_override_font_sizes/font_size = 160
+text = "HELLO WORLD"
+horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="SubViewport/CanvasLayer"]
 offset_right = 40.0

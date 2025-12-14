@@ -7,6 +7,7 @@ signal photo_taken(detected_objects: Array[Dictionary], fov: float, image: Image
 @onready var camera_pos: Node3D = $CameraPos
 @onready var shutter_player: AudioStreamPlayer = $ShutterPlayer
 @onready var canvas_layer: CanvasLayer = $SubViewport/CanvasLayer
+@onready var fov_label: Label = $SubViewport/CanvasLayer/FovLabel
 
 var target_fov: float = 75.0
 var zoom_speed: float = 8.0
@@ -19,6 +20,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	camera.transform = camera_pos.global_transform
 	camera.fov = lerp(camera.fov, target_fov, zoom_speed * delta)
+	fov_label.text = "FOV: %d" % int(camera.fov)
 
 
 func _unhandled_input(event: InputEvent) -> void:
