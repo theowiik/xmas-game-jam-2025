@@ -55,10 +55,14 @@ func _calculate_photo_score(detected_objects: Array[Dictionary], fov: float) -> 
 	return {"score": total_score, "breakdown": breakdown}
 
 
-func _on_photo_taken(detected_objects: Array[Dictionary], fov: float) -> void:
+func _on_photo_taken(detected_objects: Array[Dictionary], fov: float, image: Image) -> void:
 	var photo_info_label: RichTextLabel = player.photo_info_label
 	photo_info_label.clear()
 	print("[MAIN] Photo taken with FOV: %.1f" % fov)
+
+	# Display the photo on the PhotosHUD
+	var texture: ImageTexture = ImageTexture.create_from_image(image)
+	photos_hud.photo_texture.texture = texture
 
 	# Calculate score
 	var score_data: Dictionary = _calculate_photo_score(detected_objects, fov)

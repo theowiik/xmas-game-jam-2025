@@ -1,5 +1,7 @@
 extends Control
 
+@onready var photo_texture: TextureRect = $PhotoTexture
+
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

@@ -1,6 +1,6 @@
 class_name Camera extends Node3D
 
-signal photo_taken(detected_objects: Array[Dictionary], fov: float)
+signal photo_taken(detected_objects: Array[Dictionary], fov: float, image: Image)
 
 @onready var sub_viewport: SubViewport = $SubViewport
 @onready var camera: Camera3D = $SubViewport/Camera3D
@@ -31,12 +31,13 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _take_photo() -> void:
 	print("I took a photo of...")
-	_find_objects_in_view()
-	_save_photo()
+	var img: Image = sub_viewport.get_texture().get_image()
+	_find_objects_in_view(img)
+	_save_photo(img)
 	shutter_player.play()
 
 
-func _find_objects_in_view() -> void:
+func _find_objects_in_view(img: Image) -> void:
 	var photogenic_objects: Array[Node] = get_tree().get_nodes_in_group("photogenic")
 	var detected_objects: Array[Dictionary] = []
 	var viewport_size: Vector2 = sub_viewport.get_visible_rect().size
@@ -55,7 +56,7 @@ func _find_objects_in_view() -> void:
 
 	detected_objects.sort_custom(func(a, b): return a.distance < b.distance)
 
-	photo_taken.emit(detected_objects, camera.fov)
+	photo_taken.emit(detected_objects, camera.fov, img)
 
 
 func _is_in_camera_view(node: Node3D) -> bool:
@@ -81,8 +82,7 @@ func _is_in_camera_view(node: Node3D) -> bool:
 	return true
 
 
-func _save_photo() -> void:
-	var img: Image = sub_viewport.get_texture().get_image()
+func _save_photo(img: Image) -> void:
 	var file_path: String = "user://photo_%s.png" % Time.get_unix_time_from_system()
 	var err: Error = img.save_png(file_path)
 
