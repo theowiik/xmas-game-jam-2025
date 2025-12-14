@@ -20,10 +20,15 @@ size = Vector3(100, 1, 70.71)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o6xl0"]
 transparency = 1
 albedo_texture = ExtResource("7_o6xl0")
-billboard_mode = 1
+texture_filter = 0
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_tipki"]
 material = SubResource("StandardMaterial3D_o6xl0")
+size = Vector2(0.2, 0.2)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_tefeu")
@@ -133,8 +138,21 @@ transform = Transform3D(-4.3711395e-08, 0.49394187, -0.8694949, 0, 0.86949503, 0
 mesh = SubResource("BoxMesh_tefeu")
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.652784, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3672295, 20.326843, 9.536743e-07)
+amount = 500
+lifetime = 10.0
+preprocess = 10.0
 mesh = SubResource("QuadMesh_tipki")
+emission_shape = 3
+emission_box_extents = Vector3(50, 1, 50)
+direction = Vector3(0, 0, 0)
+gravity = Vector3(0, -1, 0)
+angular_velocity_min = -50.0
+angular_velocity_max = 50.0
+radial_accel_min = -0.5
+radial_accel_max = -0.5
+tangential_accel_min = -0.5
+tangential_accel_max = -0.5
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_tipki")
