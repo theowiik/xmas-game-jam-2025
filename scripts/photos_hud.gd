@@ -1,23 +1,38 @@
 extends Control
 
 @onready var photos_container: GridContainer = $CenterContainer/PhotosContainer
+@onready var overall_score_label: RichTextLabel = $OverallScoreLabel
 
 const PHOTO_SUMMARY_CARD = preload("res://objects/photo_summary_card.tscn")
 
+var photo_scores: Array[int] = []
+var is_final_screen_open: bool = false
+
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	visible = false
 	# Clear example cards
 	for child in photos_container.get_children():
 		child.queue_free()
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
-		visible = !visible
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if visible else Input.MOUSE_MODE_CAPTURED
+	# Don't allow manual opening - only toggling mouse capture during gameplay
+	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE and not is_final_screen_open:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED else Input.MOUSE_MODE_CAPTURED
 
 
-func add_photo(texture: ImageTexture, score: int, detected_objects: Array[Dictionary]) -> void:
+func _unhandled_input(event: InputEvent) -> void:
+	# Capture mouse on click during gameplay (not on final screen)
+	if event is InputEventMouseButton and event.pressed and not is_final_screen_open:
+		if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+
+func add_photo(texture: ImageTexture, score: int, detected_objects: Array[Dictionary]) -> bool:
+	# Store the score
+	photo_scores.append(score)
+
 	var card = PHOTO_SUMMARY_CARD.instantiate()
 	photos_container.add_child(card)
 
@@ -56,6 +71,34 @@ func add_photo(texture: ImageTexture, score: int, detected_objects: Array[Dictio
 		objects_text = ", ".join(count_parts)
 
 	label.text = "[center]%s\n[color=%s]Score: %d/100[/color][/center]" % [objects_text, score_color, score]
+
+	# Return true if this is the last photo
+	return photo_scores.size() >= 5
+
+
+func show_final_screen() -> void:
+	is_final_screen_open = true
+	visible = true
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+	# Calculate overall score
+	var overall_score: int = 0
+	for score in photo_scores:
+		overall_score += score
+
+	# Determine color based on overall score
+	var score_color: String = "red"
+	if overall_score >= 400:
+		score_color = "green"
+	elif overall_score >= 300:
+		score_color = "yellow"
+	elif overall_score >= 200:
+		score_color = "orange"
+
+	# Update the overall score label
+	overall_score_label.text = "[center][font_size=60][color=%s]OVERALL SCORE: %d/500[/color][/font_size][/center]" % [score_color, overall_score]
+
+	print("[PHOTOS_HUD] Final screen opened. Overall score: %d" % overall_score)
 
 
 func _on_exit_button_pressed() -> void:

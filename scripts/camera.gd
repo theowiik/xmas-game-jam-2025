@@ -15,6 +15,7 @@ var zoom_speed: float = 8.0
 
 const MAX_PHOTOS: int = 5
 var photos_taken: int = 0
+var can_take_photo: bool = true
 
 
 func _ready() -> void:
@@ -42,6 +43,10 @@ func _take_photo() -> void:
 		print("No photos remaining!")
 		return
 
+	if not can_take_photo:
+		print("Wait for the current photo to finish printing...")
+		return
+
 	print("I took a photo of...")
 
 	# Hide the HUD before capturing the photo
@@ -62,6 +67,7 @@ func _take_photo() -> void:
 
 	photos_taken += 1
 	_update_photos_label()
+	can_take_photo = false
 
 
 func _find_objects_in_view(img: Image) -> void:

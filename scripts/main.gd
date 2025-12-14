@@ -4,9 +4,12 @@ extends Node3D
 @onready var camera: Camera = $"Camera"
 @onready var photos_hud: Node = $"PhotosHUD"
 @onready var printer_player: AudioStreamPlayer = $PrinterPlayer
+@onready var music_player: AudioStreamPlayer = $AudioStreamPlayer
 
 var is_printing: bool = false
 var cancel_printing: bool = false
+
+const MAX_PHOTOS: int = 5
 
 
 func _ready() -> void:
@@ -101,7 +104,12 @@ func _on_photo_taken(detected_objects: Array[Dictionary], fov: float, image: Ima
 
 	# Add the photo to the PhotosHUD
 	var texture: ImageTexture = ImageTexture.create_from_image(image)
-	photos_hud.add_photo(texture, int(score), detected_objects)
+	var is_last_photo: bool = photos_hud.add_photo(texture, int(score), detected_objects)
+
+	# Lower music volume if it's the last photo
+	if is_last_photo:
+		var tween = create_tween()
+		tween.tween_property(music_player, "volume_db", -30.0, 1.0)
 
 	# Initial delay before printing starts
 	await get_tree().create_timer(1.0).timeout
@@ -111,6 +119,17 @@ func _on_photo_taken(detected_objects: Array[Dictionary], fov: float, image: Ima
 	is_printing = true
 	await _print_photo_data_animated(photo_info_label, detected_objects, fov, score, breakdown)
 	is_printing = false
+
+	# If this was the last photo, show the final screen after printing
+	if is_last_photo:
+		# Hide photo info label
+		photo_info_label.visible = false
+
+		# Show final screen
+		photos_hud.show_final_screen()
+	else:
+		# Re-enable photo taking after printing is complete
+		camera.can_take_photo = true
 
 	print("[MAIN] Photo score: %d/100" % int(score))
 

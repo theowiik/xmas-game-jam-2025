@@ -83,6 +83,19 @@ theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_4mkn1")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_aa2cs")
 text = "⏻"
 
+[node name="OverallScoreLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 20.0
+offset_bottom = 100.0
+grow_horizontal = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[center][font_size=60]OVERALL SCORE: 0/500[/font_size][/center]"
+fit_content = true
+scroll_active = false
+
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
