@@ -3,6 +3,10 @@ extends Node3D
 @onready var player: Player = $"Player"
 @onready var camera: Camera = $"Camera"
 @onready var photos_hud: Node = $"PhotosHUD"
+@onready var printer_player: AudioStreamPlayer = $PrinterPlayer
+
+var is_printing: bool = false
+var cancel_printing: bool = false
 
 
 func _ready() -> void:
@@ -56,6 +60,11 @@ func _calculate_photo_score(detected_objects: Array[Dictionary], fov: float) -> 
 
 
 func _on_photo_taken(detected_objects: Array[Dictionary], fov: float, image: Image) -> void:
+	# Cancel any previous printing
+	if is_printing:
+		cancel_printing = true
+		await get_tree().create_timer(0.1).timeout  # Wait briefly for cancellation
+
 	var photo_info_label: RichTextLabel = player.photo_info_label
 	photo_info_label.clear()
 	print("[MAIN] Photo taken with FOV: %.1f" % fov)
@@ -69,23 +78,45 @@ func _on_photo_taken(detected_objects: Array[Dictionary], fov: float, image: Ima
 	var score: float = score_data.score
 	var breakdown: Dictionary = score_data.breakdown
 
-	# Display score with color based on quality
-	var score_color: String = "red"
-	if score >= 80:
-		score_color = "green"
-	elif score >= 60:
-		score_color = "yellow"
-	elif score >= 40:
-		score_color = "orange"
+	# Initial delay before printing starts
+	await get_tree().create_timer(1.0).timeout
 
-	photo_info_label.append_text("[color=%s]SCORE: %d/100[/color]\n\n" % [score_color, int(score)])
+	# Print data line by line with delays
+	cancel_printing = false
+	is_printing = true
+	await _print_photo_data_animated(photo_info_label, detected_objects, fov, score, breakdown)
+	is_printing = false
+
+	print("[MAIN] Photo score: %d/100" % int(score))
+
+
+func _print_photo_data_animated(photo_info_label: RichTextLabel, detected_objects: Array[Dictionary], fov: float, score: float, breakdown: Dictionary) -> void:
+	var line_delay: float = 0.5  # Delay between each line
+	var pitch_variations: Array[float] = [1.0, 1.1, 0.95, 1.05, 0.9, 1.15, 0.85, 1.2]
+	var pitch_index: int = 0
 
 	# Display photo info
+	if cancel_printing: return
 	photo_info_label.append_text("Photo Info:\n")
+	printer_player.pitch_scale = pitch_variations[pitch_index % pitch_variations.size()]
+	printer_player.play()
+	pitch_index += 1
+	await get_tree().create_timer(line_delay).timeout
+
+	if cancel_printing: return
 	photo_info_label.append_text("FOV: %.1f\n" % fov)
+	printer_player.pitch_scale = pitch_variations[pitch_index % pitch_variations.size()]
+	printer_player.play()
+	pitch_index += 1
+	await get_tree().create_timer(line_delay).timeout
 
 	if detected_objects.is_empty():
+		if cancel_printing: return
 		photo_info_label.append_text("[color=gray]No subjects in frame[/color]\n")
+		printer_player.pitch_scale = pitch_variations[pitch_index % pitch_variations.size()]
+		printer_player.play()
+		pitch_index += 1
+		await get_tree().create_timer(line_delay).timeout
 	else:
 		# Count objects by type (strip trailing numbers from names)
 		var object_counts: Dictionary = {}
@@ -106,12 +137,54 @@ func _on_photo_taken(detected_objects: Array[Dictionary], fov: float, image: Ima
 				count_text += " "
 			count_text += "x%d %s" % [object_counts[obj_type], obj_type]
 
+		if cancel_printing: return
 		photo_info_label.append_text("[color=green]%s[/color]\n" % count_text)
+		printer_player.pitch_scale = pitch_variations[pitch_index % pitch_variations.size()]
+		printer_player.play()
+		pitch_index += 1
+		await get_tree().create_timer(line_delay).timeout
 
 		# Display score breakdown
+		if cancel_printing: return
 		photo_info_label.append_text("\nScore Breakdown:\n")
-		photo_info_label.append_text("  Subjects: %.0f/50\n" % breakdown.get("subjects", 0))
-		photo_info_label.append_text("  Zoom: %.0f/30\n" % breakdown.get("zoom", 0))
-		photo_info_label.append_text("  Centering: %.0f/20\n" % breakdown.get("centering", 0))
+		printer_player.pitch_scale = pitch_variations[pitch_index % pitch_variations.size()]
+		printer_player.play()
+		pitch_index += 1
+		await get_tree().create_timer(line_delay).timeout
 
-	print("[MAIN] Photo score: %d/100" % int(score))
+		if cancel_printing: return
+		photo_info_label.append_text("  Subjects: %.0f/50\n" % breakdown.get("subjects", 0))
+		printer_player.pitch_scale = pitch_variations[pitch_index % pitch_variations.size()]
+		printer_player.play()
+		pitch_index += 1
+		await get_tree().create_timer(line_delay).timeout
+
+		if cancel_printing: return
+		photo_info_label.append_text("  Zoom: %.0f/30\n" % breakdown.get("zoom", 0))
+		printer_player.pitch_scale = pitch_variations[pitch_index % pitch_variations.size()]
+		printer_player.play()
+		pitch_index += 1
+		await get_tree().create_timer(line_delay).timeout
+
+		if cancel_printing: return
+		photo_info_label.append_text("  Centering: %.0f/20\n" % breakdown.get("centering", 0))
+		printer_player.pitch_scale = pitch_variations[pitch_index % pitch_variations.size()]
+		printer_player.play()
+		pitch_index += 1
+		await get_tree().create_timer(line_delay).timeout
+
+	# Display score with color based on quality (at the bottom)
+	var score_color: String = "red"
+	if score >= 80:
+		score_color = "green"
+	elif score >= 60:
+		score_color = "yellow"
+	elif score >= 40:
+		score_color = "orange"
+
+	if cancel_printing: return
+	photo_info_label.append_text("\n[color=%s]SCORE: %d/100[/color]\n" % [score_color, int(score)])
+	printer_player.pitch_scale = pitch_variations[pitch_index % pitch_variations.size()]
+	printer_player.play()
+	pitch_index += 1
+	await get_tree().create_timer(line_delay).timeout

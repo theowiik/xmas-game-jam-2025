@@ -6,6 +6,8 @@ extends CharacterBody3D
 @onready var see_camera_label: Label3D = $SeeCameraLabel
 @onready var smile_player: AudioStreamPlayer3D = $SmilePlayer
 
+var smile_sounds: Array[AudioStream] = []
+
 var speed: float = 5.0
 var min_wait_time: float = 0.5
 var max_wait_time: float = 2.0
@@ -23,7 +25,19 @@ var reference_fov: float = 50.0  # FOV threshold at reference distance
 
 func _ready() -> void:
 	# Camera reference will be set by Main.gd
-	pass
+
+	# Load all .wav files from the smile directory
+	var dir = DirAccess.open("res://assets/sfx/smile")
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if not dir.current_is_dir() and file_name.ends_with(".wav"):
+				var sound = load("res://assets/sfx/smile/" + file_name)
+				if sound:
+					smile_sounds.append(sound)
+			file_name = dir.get_next()
+		dir.list_dir_end()
 
 
 func _process(_delta: float) -> void:
@@ -59,8 +73,9 @@ func _process(_delta: float) -> void:
 			idle_sprite.visible = false
 			see_camera_label.visible = true
 
-			# Play smile sound when starting to smile
+			# Play random smile sound when starting to smile
 			if not is_smiling:
+				smile_player.stream = smile_sounds[randi() % smile_sounds.size()]
 				smile_player.play()
 				is_smiling = true
 		else:

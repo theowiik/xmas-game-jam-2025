@@ -1,0 +1,74 @@
+[gd_scene load_steps=6 format=3 uid="uid://csnyad3rpo1o6"]
+
+[ext_resource type="Script" uid="uid://cn44i588ym501" path="res://scripts/intro.gd" id="1_i2l1n"]
+[ext_resource type="AudioStream" uid="uid://ch24cbbd2itxi" path="res://assets/sfx/SoundTrackIntro.wav" id="1_ioskq"]
+[ext_resource type="FontFile" uid="uid://c3wwox8ac8j68" path="res://assets/fonts/VT323-Regular.ttf" id="2_yjqpq"]
+[ext_resource type="Texture2D" uid="uid://dyj8ewbyba7rm" path="res://assets/sprites/snowflake.png" id="3_4bx60"]
+[ext_resource type="Texture2D" uid="uid://dxigyvt1dqdlg" path="res://assets/controls.png" id="4_wfs7u"]
+
+[node name="Intro" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_i2l1n")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_ioskq")
+volume_db = -15.0
+autoplay = true
+
+[node name="Show1" type="Label" parent="."]
+layout_mode = 0
+offset_left = 158.0
+offset_top = 170.0
+offset_right = 1496.0
+offset_bottom = 442.0
+theme_override_fonts/font = ExtResource("2_yjqpq")
+theme_override_font_sizes/font_size = 61
+text = "You are Peter Photo, the best photographer in town."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Show2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 135.0
+offset_top = 415.0
+offset_right = 1473.0
+offset_bottom = 687.0
+theme_override_fonts/font = ExtResource("2_yjqpq")
+theme_override_font_sizes/font_size = 61
+text = "It's almost christmas, and there still arent
+christmas cards.."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Show3" type="Sprite2D" parent="."]
+position = Vector2(806, 890)
+scale = Vector2(0.84408605, 0.84408605)
+texture = ExtResource("4_wfs7u")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+texture_filter = 1
+position = Vector2(784, -83)
+amount = 100
+texture = ExtResource("3_4bx60")
+lifetime = 20.0
+emission_shape = 3
+emission_rect_extents = Vector2(1200, 1)
+gravity = Vector2(0, 100)
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+orbit_velocity_min = -0.04
+orbit_velocity_max = 0.04

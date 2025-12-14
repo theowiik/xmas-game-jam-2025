@@ -1,16 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://db8ym36hjqs6c"]
+[gd_scene load_steps=3 format=3 uid="uid://db8ym36hjqs6c"]
 
 [ext_resource type="Texture2D" uid="uid://dkcx07jg55trd" path="res://assets/sprites/store_2.png" id="1_oumfq"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_nr3ms"]
-size = Vector3(5.542, 2.547, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_oumfq"]
 
 [node name="Store" type="StaticBody3D" groups=["photogenic"]]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_nr3ms")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1.575, 0, 0, 0, 1.575, 0, 0, 0, 1.575, 0, 0, 0)
