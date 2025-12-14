@@ -4,7 +4,7 @@ class_name Player extends CharacterBody3D
 @onready var desired_camera_position: Node3D = $ViewPivot/DesiredCameraPosition
 @onready var photo_info_label: RichTextLabel = $ViewPivot/Camera3D/CanvasGroup/PhotoInfoLabel
 
-var camera: Node3D = null
+var camera: Camera = null
 
 var jump_velocity: float = 4.5
 var gravity: float = 9.82
@@ -33,15 +33,6 @@ var camera_angular_damping: float = 8.0  # How fast angular velocity dampens
 var previous_rotation_y: float = 0.0
 
 
-func _ready() -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-
-	# Find and connect to the camera signal
-	camera = get_node("../Camera")
-	if camera:
-		camera.photo_taken.connect(_on_photo_taken)
-
-
 func _process(delta: float) -> void:
 	move(delta)
 	look(delta)
@@ -50,10 +41,7 @@ func _process(delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
-		get_tree().quit()
-
-	elif event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		var mouse_delta: Vector2 = event.relative
 		target_rotation_y = deg_to_rad(-mouse_delta.x * look_speed)
 		target_rotation_x = deg_to_rad(-mouse_delta.y * look_speed)

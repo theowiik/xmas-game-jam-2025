@@ -1,0 +1,92 @@
+[gd_scene load_steps=13 format=3 uid="uid://durj14btm6cw2"]
+
+[ext_resource type="Script" uid="uid://gfhc3qfg87y5" path="res://scripts/photos_hud.gd" id="1_1dysb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1dysb"]
+bg_color = Color(0.8899168, 0.29170302, 0.12413622, 0.85490197)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+shadow_size = 1
+shadow_offset = Vector2(0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5a0xr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4vmy6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4riny"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xrvih"]
+bg_color = Color(0.64505315, 0.1889604, 0.058294483, 0.85490197)
+corner_radius_top_left = 200
+corner_radius_top_right = 200
+corner_radius_bottom_right = 200
+corner_radius_bottom_left = 200
+shadow_offset = Vector2(0, 2.19)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xrvih"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b3gj8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b7wc1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f4p76"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4mkn1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aa2cs"]
+
+[node name="PhotosHUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1dysb")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.47000003)
+
+[node name="ExitButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 688.0
+offset_top = -1171.0
+offset_right = 768.0
+offset_bottom = -1091.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_1dysb")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_5a0xr")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_4vmy6")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_4riny")
+theme_override_styles/hover = SubResource("StyleBoxFlat_xrvih")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_xrvih")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_b3gj8")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_b7wc1")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_f4p76")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_4mkn1")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_aa2cs")
+text = "⏻"
+
+[node name="PhotoTexture" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 441.0
+offset_top = 311.0
+offset_right = 1053.0
+offset_bottom = 794.0
+
+[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]

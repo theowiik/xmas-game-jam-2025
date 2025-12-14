@@ -1,11 +1,13 @@
 extends Node3D
 
-@onready var player: Node3D = $"Player"
-@onready var camera: Node3D = $"Camera"
+@onready var player: Player = $"Player"
+@onready var camera: Camera = $"Camera"
+@onready var photos_hud: Node = $"PhotosHUD"
 
 
 func _ready() -> void:
 	player.camera = camera
+	camera.photo_taken.connect(player._on_photo_taken)
 
 	# Set camera reference for all people
 	var people_node = get_node("People")

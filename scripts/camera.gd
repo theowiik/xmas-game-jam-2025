@@ -1,4 +1,4 @@
-extends Node3D
+class_name Camera extends Node3D
 
 signal photo_taken(detected_objects: Array[Dictionary], fov: float)
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ovaec6nc7m42"]
+[gd_scene load_steps=14 format=3 uid="uid://ovaec6nc7m42"]
 
 [ext_resource type="PackedScene" uid="uid://wilclsh64myp" path="res://objects/player.tscn" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://cejjqp3bc5p8i" path="res://scripts/main.gd" id="1_tefeu"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://bn1if5g85g55r" path="res://objects/tree.tscn" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://c2pay3j4jqds6" path="res://objects/camera.tscn" id="5_tbgi4"]
 [ext_resource type="Texture2D" uid="uid://dyj8ewbyba7rm" path="res://assets/sprites/snowflake.png" id="7_o6xl0"]
+[ext_resource type="AudioStream" uid="uid://bwyabkpmix67f" path="res://assets/sfx/SoundTrackMainLoop.wav" id="8_tipki"]
+[ext_resource type="PackedScene" uid="uid://durj14btm6cw2" path="res://scenes/photos_hud.tscn" id="9_85g3d"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_tefeu"]
 vertices = PackedVector3Array(-24.5, 1, -24.5, -24.5, 1, 24.5, 24.5, 1, 24.5, 24.5, 1, -24.5)
@@ -133,3 +135,11 @@ mesh = SubResource("BoxMesh_tefeu")
 [node name="CPUParticles3D" type="CPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.652784, 0)
 mesh = SubResource("QuadMesh_tipki")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_tipki")
+volume_db = -2.63
+autoplay = true
+
+[node name="PhotosHUD" parent="." instance=ExtResource("9_85g3d")]
+visible = false
