@@ -19,7 +19,7 @@ animations = [{
 "speed": 2.0
 }]
 
-[node name="Reindeer" instance=ExtResource("1_f8qip")]
+[node name="Reindeer" groups=["photogenic", "reindeer"] instance=ExtResource("1_f8qip")]
 
 [node name="Sprite3D" parent="." index="2"]
 visible = false
@@ -31,4 +31,4 @@ billboard = 1
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_2aco4")
 autoplay = "default"
-frame_progress = 0.55557716
+frame_progress = 0.66690785

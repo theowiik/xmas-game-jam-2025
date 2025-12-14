@@ -23,6 +23,10 @@ window/size/viewport_height=1200
 [global_group]
 
 photogenic="Something that can be taken a photo of"
+tree=""
+reindeer=""
+santa=""
+store=""
 
 [input]
 
@@ -71,3 +75,4 @@ PHOTO={
 
 3d_render/layer_1="default"
 3d_render/layer_2="camera"
+3d_physics/layer_2="person"

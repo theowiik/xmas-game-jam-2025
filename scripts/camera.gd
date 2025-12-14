@@ -77,8 +77,22 @@ func _find_objects_in_view(img: Image) -> void:
 				var screen_pos: Vector2 = camera.unproject_position(obj_3d.global_position)
 				# Normalize screen position (0-1 range, where 0.5, 0.5 is center)
 				var normalized_pos: Vector2 = screen_pos / viewport_size
+
+				# Determine object type from groups
+				var obj_type: String = "unknown"
+				if obj_3d.is_in_group("santa"):
+					obj_type = "santa"
+				elif obj_3d.is_in_group("reindeer"):
+					obj_type = "reindeer"
+				elif obj_3d.is_in_group("person"):
+					obj_type = "person"
+				elif obj_3d.is_in_group("store"):
+					obj_type = "store"
+				elif obj_3d.is_in_group("tree"):
+					obj_type = "tree"
+
 				detected_objects.append(
-					{"name": obj_3d.name, "distance": dist, "screen_pos": normalized_pos}
+					{"name": obj_3d.name, "type": obj_type, "distance": dist, "screen_pos": normalized_pos}
 				)
 
 	detected_objects.sort_custom(func(a, b): return a.distance < b.distance)

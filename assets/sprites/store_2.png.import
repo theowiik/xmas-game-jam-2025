@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dkcx07jg55trd"
-path.s3tc="res://.godot/imported/store_2.png-ac769875b41cfda9374f29007cae2e8a.s3tc.ctex"
+path="res://.godot/imported/store_2.png-ac769875b41cfda9374f29007cae2e8a.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://assets/sprites/store_2.png"
-dest_files=["res://.godot/imported/store_2.png-ac769875b41cfda9374f29007cae2e8a.s3tc.ctex"]
+dest_files=["res://.godot/imported/store_2.png-ac769875b41cfda9374f29007cae2e8a.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

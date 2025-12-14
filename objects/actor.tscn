@@ -6,6 +6,7 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4l3vp"]
 
 [node name="Actor" type="CharacterBody3D"]
+collision_layer = 2
 script = ExtResource("1_ekr5v")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

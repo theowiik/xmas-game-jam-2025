@@ -40,16 +40,14 @@ func add_photo(texture: ImageTexture, score: int, detected_objects: Array[Dictio
 	if detected_objects.is_empty():
 		objects_text = "No subjects"
 	else:
-		# Count objects by type (strip trailing numbers from names)
+		# Count objects by type
 		var object_counts: Dictionary = {}
 		for obj_data in detected_objects:
-			var obj_name: String = obj_data.name
-			# Extract base type by removing trailing digits
-			var base_type: String = obj_name.rstrip("0123456789")
-			if object_counts.has(base_type):
-				object_counts[base_type] += 1
+			var obj_type: String = obj_data.get("type", "unknown")
+			if object_counts.has(obj_type):
+				object_counts[obj_type] += 1
 			else:
-				object_counts[base_type] = 1
+				object_counts[obj_type] = 1
 
 		# Display counts
 		var count_parts: Array[String] = []

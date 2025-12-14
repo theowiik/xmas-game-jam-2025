@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://btlhbpb1qt8t4"
-path.s3tc="res://.godot/imported/reindeer_1.png-0d8122072082c80bc38d8ed5cf3d6e4b.s3tc.ctex"
+path="res://.godot/imported/reindeer_1.png-0d8122072082c80bc38d8ed5cf3d6e4b.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://assets/sprites/reindeer_1.png"
-dest_files=["res://.godot/imported/reindeer_1.png-0d8122072082c80bc38d8ed5cf3d6e4b.s3tc.ctex"]
+dest_files=["res://.godot/imported/reindeer_1.png-0d8122072082c80bc38d8ed5cf3d6e4b.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

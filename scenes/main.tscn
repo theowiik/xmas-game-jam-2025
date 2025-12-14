@@ -258,21 +258,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.919225, 0.06974077, 19.719
 [node name="Store2" parent="Stores" instance=ExtResource("3_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.068752, 0.091507435, 6.3805304)
 
-[node name="Node3D" type="StaticBody3D" parent="."]
+[node name="HiddenWall" type="StaticBody3D" parent="."]
+collision_layer = 8
+collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HiddenWall"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.372385, 1.5488281, 2.3296509)
 shape = SubResource("BoxShape3D_choun")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Node3D"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="HiddenWall"]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.16471863, 1.54883, 25.90148)
 shape = SubResource("BoxShape3D_choun")
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="Node3D"]
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="HiddenWall"]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 25.263739, 1.54883, -0.09093857)
 shape = SubResource("BoxShape3D_choun")
 
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="Node3D"]
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="HiddenWall"]
 transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 0.7004242, 1.54883, -25.158337)
 shape = SubResource("BoxShape3D_choun")
 
@@ -280,18 +282,24 @@ shape = SubResource("BoxShape3D_choun")
 
 [node name="Santa" parent="Actors" instance=ExtResource("12_eb6dy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.379417, 0, 22.20651)
+collision_layer = 1
 
 [node name="Reindeer" parent="Actors" instance=ExtResource("13_trceg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.728499, 0, -18.867676)
+collision_layer = 1
 
 [node name="Reindeer2" parent="Actors" instance=ExtResource("13_trceg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.124703, 0, 17.619678)
+collision_layer = 1
 
 [node name="Reindeer3" parent="Actors" instance=ExtResource("13_trceg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.856418, 0, -11.929581)
+collision_layer = 1
 
 [node name="Reindeer4" parent="Actors" instance=ExtResource("13_trceg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.393059, -9.536743e-07, 13.877878)
+collision_layer = 1
 
 [node name="Reindeer5" parent="Actors" instance=ExtResource("13_trceg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5132446, -9.536743e-07, -19.30517)
+collision_layer = 1

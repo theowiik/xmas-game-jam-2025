@@ -38,10 +38,26 @@ func _calculate_photo_score(detected_objects: Array[Dictionary], fov: float) -> 
 	var total_score: float = 0.0
 	var breakdown: Dictionary = {}
 
-	# 1. SUBJECT COUNT SCORE (0-50 points)
-	# More people = more points!
-	var num_subjects: int = detected_objects.size()
-	var subject_score: float = min(50.0, num_subjects * 15.0)
+	# 1. SUBJECT SCORE (0-50 points)
+	# Different subjects have different base values
+	# Score from least to most: store < person < reindeer < santa
+	var subject_score: float = 0.0
+	for obj_data in detected_objects:
+		var obj_type: String = obj_data.get("type", "unknown")
+		match obj_type:
+			"santa":
+				subject_score += 25.0
+			"reindeer":
+				subject_score += 15.0
+			"person":
+				subject_score += 10.0
+			"store":
+				subject_score += 5.0
+			"tree":
+				subject_score += 5.0
+			_:
+				subject_score += 5.0
+	subject_score = min(50.0, subject_score)
 	breakdown["subjects"] = subject_score
 	total_score += subject_score
 
@@ -136,17 +152,15 @@ func _print_photo_data_animated(
 		pitch_index += 1
 		await get_tree().create_timer(line_delay).timeout
 	else:
-		# Count objects by type (strip trailing numbers from names)
+		# Count objects by type
 		var object_counts: Dictionary = {}
 		for obj_data in detected_objects:
-			var obj_name: String = obj_data.name
-			# Extract base type by removing trailing digits
-			var base_type: String = obj_name.rstrip("0123456789")
-			if object_counts.has(base_type):
-				object_counts[base_type] += 1
+			var obj_type: String = obj_data.get("type", "unknown")
+			if object_counts.has(obj_type):
+				object_counts[obj_type] += 1
 			else:
-				object_counts[base_type] = 1
-			print("[MAIN] - Captured: %s (%.1fm away)" % [obj_data.name, obj_data.distance])
+				object_counts[obj_type] = 1
+			print("[MAIN] - Captured: %s [%s] (%.1fm away)" % [obj_data.name, obj_type, obj_data.distance])
 
 		# Display counts on same line
 		var count_text: String = ""

@@ -11,7 +11,7 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_y1hso"]
 
-[node name="Person" type="CharacterBody3D" groups=["photogenic"]]
+[node name="Person" type="CharacterBody3D" groups=["person", "photogenic"]]
 collision_layer = 2
 script = ExtResource("1_y1hso")
 
