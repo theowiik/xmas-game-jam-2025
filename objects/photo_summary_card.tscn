@@ -14,6 +14,10 @@ grow_vertical = 2
 layout_mode = 2
 texture = ExtResource("1_eplgk")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
+bbcode_enabled = true
 text = "this is a photo"
+fit_content = true
+scroll_active = false

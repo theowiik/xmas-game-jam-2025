@@ -69,14 +69,14 @@ func _on_photo_taken(detected_objects: Array[Dictionary], fov: float, image: Ima
 	photo_info_label.clear()
 	print("[MAIN] Photo taken with FOV: %.1f" % fov)
 
-	# Display the photo on the PhotosHUD
-	var texture: ImageTexture = ImageTexture.create_from_image(image)
-	photos_hud.photo_texture.texture = texture
-
 	# Calculate score
 	var score_data: Dictionary = _calculate_photo_score(detected_objects, fov)
 	var score: float = score_data.score
 	var breakdown: Dictionary = score_data.breakdown
+
+	# Add the photo to the PhotosHUD
+	var texture: ImageTexture = ImageTexture.create_from_image(image)
+	photos_hud.add_photo(texture, int(score), detected_objects)
 
 	# Initial delay before printing starts
 	await get_tree().create_timer(1.0).timeout
