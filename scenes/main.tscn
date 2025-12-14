@@ -14,9 +14,6 @@
 vertices = PackedVector3Array(-24.5, 1, -24.5, -24.5, 1, 24.5, 24.5, 1, 24.5, 24.5, 1, -24.5)
 polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
 
-[sub_resource type="BoxMesh" id="BoxMesh_tefeu"]
-size = Vector3(100, 1, 70.71)
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o6xl0"]
 transparency = 1
 albedo_texture = ExtResource("7_o6xl0")
@@ -29,6 +26,9 @@ particles_anim_loop = false
 [sub_resource type="QuadMesh" id="QuadMesh_tipki"]
 material = SubResource("StandardMaterial3D_o6xl0")
 size = Vector2(0.2, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tefeu"]
+size = Vector3(100, 1, 70.71)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_tefeu")
@@ -107,7 +107,31 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2562381, 0)
 [node name="Trees" type="Node3D" parent="."]
 
 [node name="Tree2" parent="Trees" instance=ExtResource("4_jyhfs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2526255, 1.625006, 22.451021)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.438282, 1.625006, 13.8815565)
+
+[node name="Tree11" parent="Trees" instance=ExtResource("4_jyhfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4793854, 10.159704, 38.931747)
+
+[node name="Tree7" parent="Trees" instance=ExtResource("4_jyhfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.189125, 6.1212263, 31.524715)
+
+[node name="Tree8" parent="Trees" instance=ExtResource("4_jyhfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.135094, 6.1212263, 18.519218)
+
+[node name="Tree9" parent="Trees" instance=ExtResource("4_jyhfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.905159, 8.34137, -35.356335)
+
+[node name="Tree12" parent="Trees" instance=ExtResource("4_jyhfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.960808, 1.5031109, -8.94492)
+
+[node name="Tree13" parent="Trees" instance=ExtResource("4_jyhfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.54098, 4.797586, -27.88918)
+
+[node name="Tree14" parent="Trees" instance=ExtResource("4_jyhfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.95227, 13.49169, 3.1096268)
+
+[node name="Tree10" parent="Trees" instance=ExtResource("4_jyhfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.391748, 21.062086, -58.130436)
 
 [node name="Tree3" parent="Trees" instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.613998, 1.5891261, 22.456896)
@@ -120,22 +144,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.831331, 1.5673804, -21.525
 
 [node name="Tree6" parent="Trees" instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6154099, 1.6130638, -22.05763)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.8696156, -0.49372938, 0, 0.49372938, 0.8696156, -2.4561539, 11.564413, -46.99035)
-mesh = SubResource("BoxMesh_tefeu")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.8694949, 0.49394187, 0, -0.49394187, 0.8694949, -2.4561539, 11.564413, 47.047623)
-mesh = SubResource("BoxMesh_tefeu")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(-4.371139e-08, -0.4939419, 0.8694949, 0, 0.86949503, 0.49394196, -1.0000001, 2.1590887e-08, -3.800683e-08, 47.37237, 11.564413, -2.4120293)
-mesh = SubResource("BoxMesh_tefeu")
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
-transform = Transform3D(-4.3711395e-08, 0.49394187, -0.8694949, 0, 0.86949503, 0.49394196, 1.0000001, 2.1590884e-08, -3.800683e-08, -47.254272, 11.564413, -2.4120293)
-mesh = SubResource("BoxMesh_tefeu")
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3672295, 20.326843, 9.536743e-07)
@@ -161,3 +169,45 @@ autoplay = true
 
 [node name="PhotosHUD" parent="." instance=ExtResource("9_85g3d")]
 visible = false
+
+[node name="Walls" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.8696156, -0.49372938, 0, 0.49372938, 0.8696156, -2.4561539, 11.564413, -46.99035)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls"]
+mesh = SubResource("BoxMesh_tefeu")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 0.51225275, 0.85883474, 0, -0.85883474, 0.51225275, 0, 46.42931, 81.776886)
+mesh = SubResource("BoxMesh_tefeu")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Walls"]
+transform = Transform3D(0.74378073, -0.39037815, 0.5425819, -0.28265294, 0.5518994, 0.78454745, -0.60572076, -0.7368937, 0.30015054, 43.61746, 42.823868, 78.41906)
+mesh = SubResource("BoxMesh_tefeu")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Walls"]
+transform = Transform3D(-0.68745106, -0.35692507, 0.63246804, -0.35043147, 0.9258255, 0.14158162, -0.6360887, -0.12430662, -0.76153743, 46.15881, 2.9216194, 8.433998)
+mesh = SubResource("BoxMesh_tefeu")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Walls"]
+transform = Transform3D(-0.6425321, 0.38764238, -0.6609735, 0.38639712, 0.9088076, 0.15737393, 0.6617023, -0.15428048, -0.7337219, -37.56266, 1.6153841, 2.7168045)
+mesh = SubResource("BoxMesh_tefeu")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="Walls"]
+transform = Transform3D(0.71211797, 0.34465972, -0.6116353, 0.35469764, 0.5752114, 0.73710394, 0.6058694, -0.74185026, 0.28736827, -44.711567, 43.08741, 75.65104)
+mesh = SubResource("BoxMesh_tefeu")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Walls"]
+transform = Transform3D(-4.371139e-08, -0.4939419, 0.8694949, -0.49372944, 0.75612646, 0.42953962, -0.86961573, -0.4292952, -0.24387369, 49.828526, 22.009626, 38.766003)
+mesh = SubResource("BoxMesh_tefeu")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Walls"]
+transform = Transform3D(-4.3711395e-08, 0.49394187, -0.8694949, 0.49372944, 0.75612646, 0.42953962, 0.86961573, -0.4292952, -0.24387369, -44.79812, 22.009626, 38.766003)
+mesh = SubResource("BoxMesh_tefeu")
+skeleton = NodePath("../..")

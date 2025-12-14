@@ -38,6 +38,7 @@ func _take_photo() -> void:
 
 	# Wait for the physics frame to ensure the viewport renders without the HUD
 	await get_tree().physics_frame
+	await get_tree().physics_frame
 
 	var img: Image = sub_viewport.get_texture().get_image()
 
