@@ -54,6 +54,17 @@ theme_override_font_sizes/font_size = 160
 text = "HELLO WORLD"
 horizontal_alignment = 1
 
+[node name="PhotosLabel" type="Label" parent="SubViewport/CanvasLayer"]
+offset_left = 285.681
+offset_top = 627.315
+offset_right = 1250.187
+offset_bottom = 787.3155
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("2_q62vh")
+theme_override_font_sizes/font_size = 160
+text = "0/5 photos"
+horizontal_alignment = 1
+
 [node name="TextureRect" type="TextureRect" parent="SubViewport/CanvasLayer"]
 offset_right = 40.0
 offset_bottom = 40.0

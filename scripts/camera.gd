@@ -8,13 +8,18 @@ signal photo_taken(detected_objects: Array[Dictionary], fov: float, image: Image
 @onready var shutter_player: AudioStreamPlayer = $ShutterPlayer
 @onready var canvas_layer: CanvasLayer = $SubViewport/CanvasLayer
 @onready var fov_label: Label = $SubViewport/CanvasLayer/FovLabel
+@onready var photos_label: Label = $SubViewport/CanvasLayer/PhotosLabel
 
 var target_fov: float = 75.0
 var zoom_speed: float = 8.0
 
+const MAX_PHOTOS: int = 5
+var photos_taken: int = 0
+
 
 func _ready() -> void:
 	target_fov = camera.fov
+	_update_photos_label()
 
 
 func _process(delta: float) -> void:
@@ -33,6 +38,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _take_photo() -> void:
+	if photos_taken >= MAX_PHOTOS:
+		print("No photos remaining!")
+		return
+
 	print("I took a photo of...")
 
 	# Hide the HUD before capturing the photo
@@ -50,6 +59,9 @@ func _take_photo() -> void:
 	_find_objects_in_view(img)
 	_save_photo(img)
 	shutter_player.play()
+
+	photos_taken += 1
+	_update_photos_label()
 
 
 func _find_objects_in_view(img: Image) -> void:
@@ -106,3 +118,7 @@ func _save_photo(img: Image) -> void:
 		print("Real place to find the photo: ", ProjectSettings.globalize_path(file_path))
 	else:
 		print("Failed to save photo: ", err)
+
+
+func _update_photos_label() -> void:
+	photos_label.text = "%d/%d photos" % [photos_taken, MAX_PHOTOS]
