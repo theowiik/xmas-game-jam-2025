@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://db8ym36hjqs6c" path="res://objects/store.tscn" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://bn1if5g85g55r" path="res://objects/tree.tscn" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://c2pay3j4jqds6" path="res://objects/camera.tscn" id="5_tbgi4"]
-[ext_resource type="Texture2D" uid="uid://co5yey2y7yboh" path="res://assets/icon.svg" id="7_o6xl0"]
+[ext_resource type="Texture2D" uid="uid://dyj8ewbyba7rm" path="res://assets/sprites/snowflake.png" id="7_o6xl0"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_tefeu"]
 vertices = PackedVector3Array(-24.5, 1, -24.5, -24.5, 1, 24.5, 24.5, 1, 24.5, 24.5, 1, -24.5)
@@ -15,11 +15,13 @@ polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
 [sub_resource type="BoxMesh" id="BoxMesh_tefeu"]
 size = Vector3(100, 1, 70.71)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tipki"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o6xl0"]
+transparency = 1
 albedo_texture = ExtResource("7_o6xl0")
+billboard_mode = 1
 
-[sub_resource type="QuadMesh" id="QuadMesh_85g3d"]
-material = SubResource("StandardMaterial3D_tipki")
+[sub_resource type="QuadMesh" id="QuadMesh_tipki"]
+material = SubResource("StandardMaterial3D_o6xl0")
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_tefeu")
@@ -129,5 +131,5 @@ transform = Transform3D(-4.3711395e-08, 0.49394187, -0.8694949, 0, 0.86949503, 0
 mesh = SubResource("BoxMesh_tefeu")
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18.873104, 0)
-mesh = SubResource("QuadMesh_85g3d")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.652784, 0)
+mesh = SubResource("QuadMesh_tipki")
