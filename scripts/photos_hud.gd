@@ -2,11 +2,13 @@ extends Control
 
 @onready var photos_container: GridContainer = $CenterContainer/PhotosContainer
 @onready var overall_score_label: RichTextLabel = $OverallScoreLabel
+@onready var tada_player: AudioStreamPlayer = $TadaPlayer
 
 const PHOTO_SUMMARY_CARD = preload("res://objects/photo_summary_card.tscn")
 
 var photo_scores: Array[int] = []
 var is_final_screen_open: bool = false
+
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -18,8 +20,17 @@ func _ready() -> void:
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	# Don't allow manual opening - only toggling mouse capture during gameplay
-	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE and not is_final_screen_open:
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED else Input.MOUSE_MODE_CAPTURED
+	if (
+		event is InputEventKey
+		and event.pressed
+		and event.keycode == KEY_ESCAPE
+		and not is_final_screen_open
+	):
+		Input.mouse_mode = (
+			Input.MOUSE_MODE_VISIBLE
+			if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED
+			else Input.MOUSE_MODE_CAPTURED
+		)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -70,7 +81,9 @@ func add_photo(texture: ImageTexture, score: int, detected_objects: Array[Dictio
 			count_parts.append("%dx %s" % [object_counts[obj_type], obj_type])
 		objects_text = ", ".join(count_parts)
 
-	label.text = "[center]%s\n[color=%s]Score: %d/100[/color][/center]" % [objects_text, score_color, score]
+	label.text = (
+		"[center]%s\n[color=%s]Score: %d/100[/color][/center]" % [objects_text, score_color, score]
+	)
 
 	# Return true if this is the last photo
 	return photo_scores.size() >= 5
@@ -79,6 +92,7 @@ func add_photo(texture: ImageTexture, score: int, detected_objects: Array[Dictio
 func show_final_screen() -> void:
 	is_final_screen_open = true
 	visible = true
+	tada_player.play()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 	# Calculate overall score
@@ -145,7 +159,10 @@ func show_final_screen() -> void:
 		score_color = "red"
 
 	# Update the overall score label
-	overall_score_label.text = "[center][font_size=80][color=%s]%s[/color][/font_size]\n[font_size=50]%d/500[/font_size]  [font_size=40]%s[/font_size][/center]" % [score_color, grade, overall_score, tagline]
+	overall_score_label.text = (
+		"[center][font_size=80][color=%s]%s[/color][/font_size]\n[font_size=50]%d/500[/font_size]  [font_size=40]%s[/font_size][/center]"
+		% [score_color, grade, overall_score, tagline]
+	)
 
 	# Fade in the screen
 	modulate.a = 0.0

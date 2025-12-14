@@ -98,7 +98,12 @@ func _find_objects_in_view(img: Image) -> void:
 					obj_type = "tree"
 
 				detected_objects.append(
-					{"name": obj_3d.name, "type": obj_type, "distance": dist, "screen_pos": normalized_pos}
+					{
+						"name": obj_3d.name,
+						"type": obj_type,
+						"distance": dist,
+						"screen_pos": normalized_pos
+					}
 				)
 
 	detected_objects.sort_custom(func(a, b): return a.distance < b.distance)

@@ -179,7 +179,12 @@ func _print_photo_data_animated(
 				object_counts[obj_type] += 1
 			else:
 				object_counts[obj_type] = 1
-			print("[MAIN] - Captured: %s [%s] (%.1fm away)" % [obj_data.name, obj_type, obj_data.distance])
+			print(
+				(
+					"[MAIN] - Captured: %s [%s] (%.1fm away)"
+					% [obj_data.name, obj_type, obj_data.distance]
+				)
+			)
 
 		# Display counts on same line
 		var count_text: String = ""
