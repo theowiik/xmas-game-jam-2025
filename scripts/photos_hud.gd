@@ -86,19 +86,73 @@ func show_final_screen() -> void:
 	for score in photo_scores:
 		overall_score += score
 
-	# Determine color based on overall score
+	# Determine grade and tagline based on overall score
+	var grade: String = ""
+	var tagline: String = ""
 	var score_color: String = "red"
-	if overall_score >= 400:
+
+	if overall_score >= 475:
+		grade = "A+"
+		tagline = "Christmas is saved!"
 		score_color = "green"
-	elif overall_score >= 300:
+	elif overall_score >= 450:
+		grade = "A"
+		tagline = "Santa would be proud!"
+		score_color = "green"
+	elif overall_score >= 425:
+		grade = "A-"
+		tagline = "Ho ho wonderful!"
+		score_color = "green"
+	elif overall_score >= 400:
+		grade = "B+"
+		tagline = "Merry good job!"
 		score_color = "yellow"
-	elif overall_score >= 200:
+	elif overall_score >= 375:
+		grade = "B"
+		tagline = "Pretty festive!"
+		score_color = "yellow"
+	elif overall_score >= 350:
+		grade = "B-"
+		tagline = "Not bad for an elf!"
+		score_color = "yellow"
+	elif overall_score >= 325:
+		grade = "C+"
+		tagline = "Could use more cheer"
 		score_color = "orange"
+	elif overall_score >= 300:
+		grade = "C"
+		tagline = "Needs more jingle"
+		score_color = "orange"
+	elif overall_score >= 275:
+		grade = "C-"
+		tagline = "Rather grinchy..."
+		score_color = "orange"
+	elif overall_score >= 250:
+		grade = "D+"
+		tagline = "Lumps of coal incoming"
+		score_color = "red"
+	elif overall_score >= 225:
+		grade = "D"
+		tagline = "Not very jolly"
+		score_color = "red"
+	elif overall_score >= 200:
+		grade = "D-"
+		tagline = "Bah humbug!"
+		score_color = "red"
+	else:
+		grade = "F"
+		tagline = "You're on the naughty list"
+		score_color = "red"
 
 	# Update the overall score label
-	overall_score_label.text = "[center][font_size=60][color=%s]OVERALL SCORE: %d/500[/color][/font_size][/center]" % [score_color, overall_score]
+	overall_score_label.text = "[center][font_size=80][color=%s]%s[/color][/font_size]\n[font_size=50]%d/500[/font_size]  [font_size=40]%s[/font_size][/center]" % [score_color, grade, overall_score, tagline]
 
-	print("[PHOTOS_HUD] Final screen opened. Overall score: %d" % overall_score)
+	# Fade in the screen
+	modulate.a = 0.0
+	var tween = create_tween()
+	tween.tween_property(self, "modulate:a", 1.0, 1.5)
+
+	print("[PHOTOS_HUD] Final screen opened. Overall score: %d (%s)" % [overall_score, grade])
 
 
 func _on_exit_button_pressed() -> void:

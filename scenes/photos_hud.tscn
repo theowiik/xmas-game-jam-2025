@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://durj14btm6cw2"]
+[gd_scene load_steps=15 format=3 uid="uid://durj14btm6cw2"]
 
 [ext_resource type="Script" uid="uid://gfhc3qfg87y5" path="res://scripts/photos_hud.gd" id="1_1dysb"]
+[ext_resource type="FontFile" uid="uid://c3wwox8ac8j68" path="res://assets/fonts/VT323-Regular.ttf" id="2_4riny"]
 [ext_resource type="PackedScene" uid="uid://beergix2q71jb" path="res://objects/photo_summary_card.tscn" id="2_4vmy6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1dysb"]
@@ -91,6 +92,7 @@ offset_top = 20.0
 offset_bottom = 100.0
 grow_horizontal = 2
 mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_4riny")
 bbcode_enabled = true
 text = "[center][font_size=60]OVERALL SCORE: 0/500[/font_size][/center]"
 fit_content = true
@@ -120,30 +122,6 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="PhotoSummaryCard8" parent="CenterContainer/PhotosContainer" instance=ExtResource("2_4vmy6")]
-layout_mode = 2
-
-[node name="PhotoSummaryCard9" parent="CenterContainer/PhotosContainer" instance=ExtResource("2_4vmy6")]
-layout_mode = 2
-
-[node name="PhotoSummaryCard10" parent="CenterContainer/PhotosContainer" instance=ExtResource("2_4vmy6")]
-layout_mode = 2
-
-[node name="PhotoSummaryCard11" parent="CenterContainer/PhotosContainer" instance=ExtResource("2_4vmy6")]
-layout_mode = 2
-
-[node name="PhotoSummaryCard12" parent="CenterContainer/PhotosContainer" instance=ExtResource("2_4vmy6")]
-layout_mode = 2
-
-[node name="PhotoSummaryCard2" parent="CenterContainer/PhotosContainer" instance=ExtResource("2_4vmy6")]
-layout_mode = 2
-
-[node name="PhotoSummaryCard3" parent="CenterContainer/PhotosContainer" instance=ExtResource("2_4vmy6")]
-layout_mode = 2
-
-[node name="PhotoSummaryCard4" parent="CenterContainer/PhotosContainer" instance=ExtResource("2_4vmy6")]
-layout_mode = 2
-
-[node name="PhotoSummaryCard" parent="CenterContainer/PhotosContainer" instance=ExtResource("2_4vmy6")]
 layout_mode = 2
 
 [connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
