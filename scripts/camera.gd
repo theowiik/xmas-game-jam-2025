@@ -6,6 +6,7 @@ signal photo_taken(detected_objects: Array[Dictionary], fov: float, image: Image
 @onready var camera: Camera3D = $SubViewport/Camera3D
 @onready var camera_pos: Node3D = $CameraPos
 @onready var shutter_player: AudioStreamPlayer = $ShutterPlayer
+@onready var canvas_layer: CanvasLayer = $SubViewport/CanvasLayer
 
 var target_fov: float = 75.0
 var zoom_speed: float = 8.0
@@ -31,7 +32,18 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _take_photo() -> void:
 	print("I took a photo of...")
+
+	# Hide the HUD before capturing the photo
+	canvas_layer.visible = false
+
+	# Wait for the physics frame to ensure the viewport renders without the HUD
+	await get_tree().physics_frame
+
 	var img: Image = sub_viewport.get_texture().get_image()
+
+	# Show the HUD again
+	canvas_layer.visible = true
+
 	_find_objects_in_view(img)
 	_save_photo(img)
 	shutter_player.play()
